@@ -123,7 +123,6 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				byte[] receiveBuf = new byte[dataLength];
 				DatagramPacket receivePacket = new DatagramPacket(receiveBuf, receiveBuf.length);
 				socket.receive(receivePacket);
-				System.out.println("receiveBuf: " + new String(receiveBuf));
 				if ( receivePacket.getLength() != EchoServiceBase.RESPONSE_LEN )
 					throw new Exception("Bad response: sent " + EchoServiceBase.HEADER_LEN + " bytes but got back " + receivePacket.getLength());
 				String rcvdHeader = new String(receiveBuf,0,4);
