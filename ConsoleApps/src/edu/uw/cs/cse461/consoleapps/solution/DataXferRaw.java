@@ -128,7 +128,7 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 		// if a total of 3500 bytes will be sent, the server would respond with three packets
 		// containing 1000 payload bytes and a final packet with 500 payload bytes.
 		// (The transfer lengths offered by the four dataxfer ports are all multiples of 1000,
-		// but that won't be the case in later projects.)
+		// but that won't be the case in later projects.
 		DatagramSocket socket = new DatagramSocket();
 		socket.setSoTimeout(socketTimeout);
 		DatagramPacket sendPacket = new DatagramPacket(header, header.length, new InetSocketAddress(hostIP, udpPort));
