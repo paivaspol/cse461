@@ -1,0 +1,186 @@
+
+----- PingRaw
+Group: Member One and Member Two
+[PROJ1TEST] UDP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 1 pings were completed. 
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 1 of 3 pings were completed. 
+    EXPECT: We expected to complete 0 of 3 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 1 pings were completed. 
+    EXPECT: We expected to complete 1 of 1 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 0 of 2 pings were completed. 
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 0 of 3 pings were completed. 
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 0 of 2 pings were completed. 
+
+Total tests: 12 | 4 Passed, 0 OK, 8 Failed
+
+
+----- PingRaw
+Group: Member One and Member Two
+[PROJ1TEST] UDP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 1 pings were completed. 
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 1 of 3 pings were completed. 
+    EXPECT: We expected to complete 0 of 3 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 1 pings were completed. 
+    EXPECT: We expected to complete 1 of 1 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 0 of 2 pings were completed. 
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 0 of 3 pings were completed. 
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 0 of 2 pings were completed. 
+
+Total tests: 12 | 4 Passed, 0 OK, 8 Failed
+
+
+----- PingRaw
+Group: Member One and Member Two
+[PROJ1TEST] UDP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 1 pings were completed. 
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 1 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 1 of 3 pings were completed. 
+    EXPECT: We expected to complete 0 of 3 pings.
+[PROJ1TEST] UDP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 1 of 2 pings were completed. 
+    EXPECT: We expected to complete 0 of 2 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 1 pings were completed. 
+    EXPECT: We expected to complete 1 of 1 pings.
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds immediately.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server does not respond.
+    RESULT: 0 of 2 pings were completed. 
+[PROJ1TEST] TCP, ping test: FAIL
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 500ms.
+    RESULT: 0 of 5 pings were completed. 
+    EXPECT: We expected to complete 5 of 5 pings.
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 5000ms.
+    RESULT: 0 of 3 pings were completed. 
+[PROJ1TEST] TCP, ping test: PASS
+    CLIENT: Your client pings our server.
+    SERVER: Our server responds with a delay of 15000ms.
+    RESULT: 0 of 2 pings were completed. 
+
+Total tests: 12 | 4 Passed, 0 OK, 8 Failed
+
