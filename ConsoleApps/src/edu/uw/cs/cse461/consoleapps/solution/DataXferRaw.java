@@ -141,7 +141,6 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 		int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
 		xferLength -= dataLength;
 		while (xferLength > 0) {
-			socket.setSoTimeout(socketTimeout);
 			resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
 			socket.receive(rxPacket);
 			xferLength -= rxPacket.getLength();
