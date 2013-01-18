@@ -2,13 +2,12 @@ package edu.uw.cs.cse461.consoleapps.solution;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.nio.ByteBuffer;
 
 import edu.uw.cs.cse461.consoleapps.DataXferInterface.DataXferRawInterface;
 import edu.uw.cs.cse461.net.base.NetBase;
@@ -26,6 +25,9 @@ import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
  */
 public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInterface {
 	private static final String TAG="DataXferRaw";
+	
+	private static final int RX_HEADER_SIZE = 4;
+	private static final int PAYLOAD_SIZE = 1000;
 	
 	// ConsoleApp's must have a constructor taking no arguments
 	public DataXferRaw() throws Exception {
@@ -120,7 +122,28 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 	 */
 	@Override
 	public byte[] udpDataXfer(byte[] header, String hostIP, int udpPort, int socketTimeout, int xferLength) throws IOException {
-		return null;
+		// Except for the last packet, the payload should be 1000 bytes. So, for instance,
+		// if a total of 3500 bytes will be sent, the server would respond with three packets
+		// containing 1000 payload bytes and a final packet with 500 payload bytes.
+		// (The transfer lengths offered by the four dataxfer ports are all multiples of 1000,
+		// but that won't be the case in later projects.)
+		DatagramSocket socket = new DatagramSocket();
+		socket.setSoTimeout(socketTimeout);
+		DatagramPacket sendPacket = new DatagramPacket(header, header.length, new InetSocketAddress(hostIP, udpPort));
+		socket.send(sendPacket);
+		// Received packet from server.
+		ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
+		byte[] rxData = new byte[PAYLOAD_SIZE + RX_HEADER_SIZE];
+		DatagramPacket rxPacket = new DatagramPacket(rxData, rxData.length);
+		socket.receive(rxPacket);
+		int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
+		xferLength -= dataLength;
+		while (xferLength > 0) {
+			resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
+			socket.receive(rxPacket);
+			xferLength -= rxPacket.getLength();
+		}
+		return resultBuf.array();
 	}
 	
 	/**
