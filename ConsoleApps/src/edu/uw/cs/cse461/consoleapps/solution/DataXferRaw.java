@@ -2,11 +2,13 @@ package edu.uw.cs.cse461.consoleapps.solution;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
-import java.net.SocketTimeoutException;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 
 import edu.uw.cs.cse461.consoleapps.DataXferInterface.DataXferRawInterface;
@@ -139,6 +141,7 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 		int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
 		xferLength -= dataLength;
 		while (xferLength > 0) {
+			socket.setSoTimeout(socketTimeout);
 			resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
 			socket.receive(rxPacket);
 			xferLength -= rxPacket.getLength();
@@ -178,7 +181,27 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 	 */
 	@Override
 	public byte[] tcpDataXfer(byte[] header, String hostIP, int tcpPort, int socketTimeout, int xferLength) throws IOException {
-		return null;
+		Socket socket = new Socket(hostIP, tcpPort);
+		socket.setSoTimeout(socketTimeout);
+		OutputStream os = socket.getOutputStream();
+		// Send header
+		os.write(header);
+		socket.shutdownOutput();
+		ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
+		int headerAndDataSize = xferLength + RX_HEADER_SIZE;
+		byte[] buf = new byte[headerAndDataSize];
+		InputStream is = socket.getInputStream();
+		int readLen = is.read(buf, 0, headerAndDataSize) - RX_HEADER_SIZE;
+		resultBuf.put(buf, RX_HEADER_SIZE, readLen);
+		xferLength -= readLen;
+		// Read the data sent by server
+		while (xferLength > 0) {
+			readLen = is.read(buf, 0, xferLength);
+			resultBuf.put(buf, 0, readLen);
+			xferLength -= readLen;
+		}
+		socket.close();
+		return resultBuf.array();
 	}
 	
 	/**
@@ -197,7 +220,7 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 				TransferRate.stop("tcp", xferLength);
 			} catch (Exception e) {
 				TransferRate.abort("tcp", xferLength);
-				//System.out.println("TCP trial failed: " + e.getMessage());
+				System.out.println("TCP trial failed: " + e.getMessage());
 			}
 		
 		}
