@@ -55,18 +55,13 @@ public class DataXferRawService extends DataXferServiceBase implements
 					"Header and response strings must be same length: '"
 							+ HEADER_STR + "' '" + RESPONSE_OKAY_STR + "'");
 
-		// The echo raw service's IP address is the ip the entire app is running
+		// The DataXferRawService raw service's IP address is the ip the entire app is running
 		// under
 		String serverIP = IPFinder.localIP();
 		if (serverIP == null)
 			throw new Exception(
 					"IPFinder isn't providing the local IP address.  Can't run.");
 
-		// There is (purposefully) no config file field to define the echo raw
-		// service's ports.
-		// Instead, ephemeral ports are used. (You can run the
-		// dumpservericestate application
-		// to see ports are actually allocated.)
 		// allocate four ports
 		mDatagramSocket = new DatagramSocket[NPORTS];  // to keep track each of the datagram socket
 		Thread[] dgramThreads = new Thread[NPORTS];  // keep track each of the thread corresponding to a port
@@ -184,6 +179,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 								// Keep on sending the packet until the transfer size is 0.
 								// This is to prevent memory outage in the client side.
 								while (xferSize > 0) {
+									// TODO: why UDP_PAYLOAD_SIZE when this is TCP?
 									int size = UDP_PAYLOAD_SIZE;
 									if (xferSize < UDP_PAYLOAD_SIZE) {
 										size = xferSize;
@@ -240,7 +236,6 @@ public class DataXferRawService extends DataXferServiceBase implements
 	@Override
 	public String dumpState() {
 		// Example of expected output:
-		// dataxferraw Service:
 		// Listening on:
 		//		TCP: 127.0.0.1:46104 (1000B), 127.0.0.1:46105 (10000B), 127.0.0.1:46106 (100000B), 127.0.0.1:46107 (1000000B)
 		// 		UDP: 127.0.0.1:46104 (1000B), 127.0.0.1:46105 (10000B), 127.0.0.1:46106 (100000B), 127.0.0.1:46107 (1000000B)
@@ -250,6 +245,5 @@ public class DataXferRawService extends DataXferServiceBase implements
 				":" + (mBasePort + 2) + " (100000B), " + serverIP + ":" +
 				(mBasePort + 3) + " (1000000B)";
 		return "Listening on:\n\tTCP: " + portNum + "\n\tUDP: " + portNum;
-
 	}
 }

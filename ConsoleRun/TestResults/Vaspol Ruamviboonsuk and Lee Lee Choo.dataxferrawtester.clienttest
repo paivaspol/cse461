@@ -1,0 +1,2529 @@
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 2 of 2 transfers were completed. 
+    EXPECT: We expected to complete 0 of 2 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 2 of 2 transfers were completed. 
+    EXPECT: We expected to complete 0 of 2 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 1 of 2 transfers were completed. 
+    EXPECT: We expected to complete 0 of 2 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 1 of 2 transfers were completed. 
+    EXPECT: We expected to complete 0 of 2 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 2 of 3 transfers were completed. 
+    EXPECT: We expected to complete 0 of 3 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 3 of 3 transfers were completed. 
+    EXPECT: We expected to complete 0 of 3 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 2 of 3 transfers were completed. 
+    EXPECT: We expected to complete 0 of 3 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 2 of 3 transfers were completed. 
+    EXPECT: We expected to complete 0 of 3 transfers.
+
+Total tests: 32 | 19 Passed, 2 OK, 11 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 23 Passed, 1 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 23 Passed, 1 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 2 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 21 Passed, 3 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 30 Passed, 2 OK, 0 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 31 Passed, 1 OK, 0 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 3 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 23 Passed, 1 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 23 Passed, 1 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 2 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 1 transfers were completed. 
+    EXPECT: We expected to complete 1 of 1 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: FAIL
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 0 of 5 transfers were completed. 
+    EXPECT: We expected to complete 5 of 5 transfers.
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 22 Passed, 2 OK, 8 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 31 Passed, 1 OK, 0 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: OK
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 4 of 5 transfers were completed. 
+    INFO:   It is normal for UDP to fail this test. Can you figure out why?
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 31 Passed, 1 OK, 0 Failed
+
+
+----- DataXferRaw
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] UDP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 1 of 1 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back the correct amount of data.
+    RESULT: 5 of 5 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server doesn't respond.
+    RESULT: 0 of 2 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 1000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 10000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 80000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+[PROJ1TEST] TCP Xfer test: PASS
+    CLIENT: Your client requests 150000 bytes of data.
+    SERVER: Our server sends back too little data.
+    RESULT: 0 of 3 transfers were completed. 
+
+Total tests: 32 | 32 Passed, 0 OK, 0 Failed
+

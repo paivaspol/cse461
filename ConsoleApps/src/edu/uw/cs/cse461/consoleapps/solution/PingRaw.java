@@ -131,7 +131,6 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				if ( !rcvdHeader.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR) ) 
 					throw new Exception("Bad returned header: got '" + rcvdHeader + "' but wanted '" + EchoServiceBase.RESPONSE_OKAY_STR);
 				ElapsedTime.stop("PingRaw_UDPTotalDelay");
-				
 			}
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());

@@ -129,23 +129,32 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 		// containing 1000 payload bytes and a final packet with 500 payload bytes.
 		// (The transfer lengths offered by the four dataxfer ports are all multiples of 1000,
 		// but that won't be the case in later projects.
-		DatagramSocket socket = new DatagramSocket();
-		socket.setSoTimeout(socketTimeout);
-		DatagramPacket sendPacket = new DatagramPacket(header, header.length, new InetSocketAddress(hostIP, udpPort));
-		socket.send(sendPacket);
-		// Received packet from server.
-		ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-		byte[] rxData = new byte[PAYLOAD_SIZE + RX_HEADER_SIZE];
-		DatagramPacket rxPacket = new DatagramPacket(rxData, rxData.length);
-		socket.receive(rxPacket);
-		int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
-		xferLength -= dataLength;
-		while (xferLength > 0) {
-			resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
+		DatagramSocket socket = null;
+		try {
+			socket = new DatagramSocket();
+			socket.setSoTimeout(socketTimeout);
+			DatagramPacket sendPacket = new DatagramPacket(header, header.length, new InetSocketAddress(hostIP, udpPort));
+			socket.send(sendPacket);
+			// Received packet from server.
+			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
+			byte[] rxData = new byte[PAYLOAD_SIZE + RX_HEADER_SIZE];
+			DatagramPacket rxPacket = new DatagramPacket(rxData, rxData.length);
 			socket.receive(rxPacket);
-			xferLength -= rxPacket.getLength();
+			int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
+			xferLength -= dataLength;
+			while (xferLength > 0) {
+				resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
+				socket.receive(rxPacket);
+				xferLength -= rxPacket.getLength();
+			}
+			return resultBuf.array();
+			// TODO: If I did not catch the exception, means it will still happen right? but no matter what it will reach finally right?
+			// as I still want the exception to propagate up.
+		} finally {
+			if (socket !=null) {
+				socket.close();
+			}
 		}
-		return resultBuf.array();
 	}
 	
 	/**
@@ -180,27 +189,33 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 	 */
 	@Override
 	public byte[] tcpDataXfer(byte[] header, String hostIP, int tcpPort, int socketTimeout, int xferLength) throws IOException {
-		Socket socket = new Socket(hostIP, tcpPort);
-		socket.setSoTimeout(socketTimeout);
-		OutputStream os = socket.getOutputStream();
-		// Send header
-		os.write(header);
-		socket.shutdownOutput();
-		ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-		int headerAndDataSize = xferLength + RX_HEADER_SIZE;
-		byte[] buf = new byte[headerAndDataSize];
-		InputStream is = socket.getInputStream();
-		int readLen = is.read(buf, 0, headerAndDataSize) - RX_HEADER_SIZE;
-		resultBuf.put(buf, RX_HEADER_SIZE, readLen);
-		xferLength -= readLen;
-		// Read the data sent by server
-		while (xferLength > 0) {
-			readLen = is.read(buf, 0, xferLength);
-			resultBuf.put(buf, 0, readLen);
+		Socket socket = null;
+		try {
+			socket = new Socket(hostIP, tcpPort);
+			socket.setSoTimeout(socketTimeout);
+			OutputStream os = socket.getOutputStream();
+			// Send header
+			os.write(header);
+			socket.shutdownOutput();
+			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
+			int headerAndDataSize = xferLength + RX_HEADER_SIZE;
+			byte[] buf = new byte[headerAndDataSize];
+			InputStream is = socket.getInputStream();
+			int readLen = is.read(buf, 0, headerAndDataSize) - RX_HEADER_SIZE;
+			resultBuf.put(buf, RX_HEADER_SIZE, readLen);
 			xferLength -= readLen;
+			// Read the data sent by server
+			while (xferLength > 0) {
+				readLen = is.read(buf, 0, xferLength);
+				resultBuf.put(buf, 0, readLen);
+				xferLength -= readLen;
+			}
+			return resultBuf.array();
+		} finally {
+			if (socket != null) {
+				socket.close();
+			}
 		}
-		socket.close();
-		return resultBuf.array();
 	}
 	
 	/**
