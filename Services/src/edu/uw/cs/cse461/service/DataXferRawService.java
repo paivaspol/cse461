@@ -239,7 +239,17 @@ public class DataXferRawService extends DataXferServiceBase implements
 	 */
 	@Override
 	public String dumpState() {
-		return "";
+		// Example of expected output:
+		// dataxferraw Service:
+		// Listening on:
+		//		TCP: 127.0.0.1:46104 (1000B), 127.0.0.1:46105 (10000B), 127.0.0.1:46106 (100000B), 127.0.0.1:46107 (1000000B)
+		// 		UDP: 127.0.0.1:46104 (1000B), 127.0.0.1:46105 (10000B), 127.0.0.1:46106 (100000B), 127.0.0.1:46107 (1000000B)
+		String serverIP = IPFinder.localIP();
+		String portNum = "" + serverIP + ":" + mBasePort + " (1000B), " + 
+				serverIP + ":" + (mBasePort + 1) + " (10000B), " + serverIP +
+				":" + (mBasePort + 2) + " (100000B), " + serverIP + ":" +
+				(mBasePort + 3) + " (1000000B)";
+		return "Listening on:\n\tTCP: " + portNum + "\n\tUDP: " + portNum;
 
 	}
 }
