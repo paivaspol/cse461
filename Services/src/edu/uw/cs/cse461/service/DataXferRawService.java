@@ -37,10 +37,8 @@ public class DataXferRawService extends DataXferServiceBase implements
 	public static final int[] XFERSIZE = { 1000, 10000, 100000, 1000000 };
 	public static final int UDP_PAYLOAD_SIZE = 1000;
 	private int mBasePort;
-//	private List<ServerSocket> mServerSocketsList;
-//	private List<DatagramSocket> mDatagramSocketsList;
-	private ServerSocket mServerSocket;
-	private DatagramSocket mDatagramSocket;
+	private ServerSocket[] mServerSocket;
+	private DatagramSocket[] mDatagramSocket;
 
 	public DataXferRawService() throws Exception {
 		super("dataxferraw");
@@ -75,38 +73,27 @@ public class DataXferRawService extends DataXferServiceBase implements
 //			
 //		}
 		
-//		mDatagramSocket = new DatagramSocket[NPORTS];
-		for (int i = 0; i < NPORTS; i++) {
-	
-		}
+		mDatagramSocket = new DatagramSocket[NPORTS];
 		Thread[] dgramThreads = new Thread[NPORTS];
-		Thread[] tcpPacketThreads = new Thread[NPORTS];
 		for (int i = 0; i < NPORTS; i++) {
-//			mServerSocket = new ServerSocket();
-//			mServerSocket.bind(new InetSocketAddress(serverIP, mBasePort + i));
-//			mServerSocket.setSoTimeout(NetBase.theNetBase().config()
-//					.getAsInt("net.timeout.granularity", 500));
-//			Log.i(TAG, "Server socket = " + mServerSocket.getLocalSocketAddress());
-			mDatagramSocket = new DatagramSocket(new InetSocketAddress(serverIP, mBasePort + i));
-			mDatagramSocket.setSoTimeout(NetBase.theNetBase().config()
+			mDatagramSocket[i] = new DatagramSocket(new InetSocketAddress(serverIP, mBasePort + i));
+			mDatagramSocket[i].setSoTimeout(NetBase.theNetBase().config()
 					.getAsInt("net.timeout.granularity", 500));
+			final DatagramSocket soc = mDatagramSocket[i];
 			// for datagram thread to wait for incoming connections
 			Thread dgramThread = new Thread() {
 				public void run() {
 					byte buf[] = new byte[HEADER_LEN];
 					DatagramPacket packet = new DatagramPacket(buf, buf.length);
 					// Thread termination in this code is primitive. When shutdown()
-					// is called (by the
-					// application's main thread, so asynchronously to the threads
-					// just mentioned) it
-					// closes the sockets. This causes an exception on any thread
-					// trying to read from
-					// it, which is what provokes thread termination.
+					// is called (by the application's main thread, so asynchronously to the threads
+					// just mentioned) it closes the sockets. This causes an exception on any thread
+					// trying to read from it, which is what provokes thread termination.
 					try {
 						while (!mAmShutdown) {
 							try {
-								int bytesLeft = XFERSIZE[mServerSocket.getLocalPort() - mBasePort];
-								mDatagramSocket.receive(packet);
+								int bytesLeft = XFERSIZE[soc.getLocalPort() - mBasePort];
+								soc.receive(packet);
 								if (packet.getLength() < HEADER_STR.length())
 									throw new Exception("Bad header: length = "
 											+ packet.getLength());
@@ -126,7 +113,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 									byte[] returnPacket = new byte[size];
 									System.arraycopy(RESPONSE_OKAY_STR.getBytes(), 0,
 											returnPacket, 0, HEADER_STR.length());  // put the header into the packet 
-									mDatagramSocket.send(new DatagramPacket(returnPacket, returnPacket.length,
+									soc.send(new DatagramPacket(returnPacket, returnPacket.length,
 											packet.getAddress(), packet.getPort()));
 									bytesLeft -= UDP_PAYLOAD_SIZE;
 								}
@@ -139,32 +126,103 @@ public class DataXferRawService extends DataXferServiceBase implements
 							}
 						}
 					} finally {
-						if (mDatagramSocket != null) {
-							mDatagramSocket.close();
-							mDatagramSocket = null;
+						if (soc != null) {
+							soc.close();
 						}
 					}
 				}
 			};
 			dgramThread.start();
 			dgramThreads[i] = dgramThread;
-			// for accepting tcp packets
-//			for (int i = 0; i < NPORTS; i++) {
-//				mDatagramSocket = new DatagramSocket(new InetSocketAddress(serverIP, mBasePort + i));
-//				mDatagramSocket.setSoTimeout(NetBase.theNetBase().config()
-//						.getAsInt("net.timeout.granularity", 500));
-//		
-//				Log.i(TAG,
-//						"Datagram socket = " + mDatagramSocket.getLocalSocketAddress());
-//		
-//				Thread tcpPacketThread = new Thread() {
-//					public void run() {
-//		
-//					}
-//				};
-//			}
-//			tcpPacketThread.start();
-//			tcpPacketThreads[i] = tcpPacketThread;
+		}
+		
+		mServerSocket = new ServerSocket[NPORTS];
+		Thread[] tcpThreads = new Thread[NPORTS];
+		// TCP sockets
+		for (int i = 0; i < NPORTS; i++) {
+			mServerSocket[i] = new ServerSocket();
+			mServerSocket[i].bind(new InetSocketAddress(serverIP, mBasePort + i));
+			mServerSocket[i].setSoTimeout(NetBase.theNetBase().config()
+					.getAsInt("net.timeout.granularity", 500));
+			Log.i(TAG, "Server socket = " + mServerSocket[i].getLocalSocketAddress());
+			final ServerSocket serverSocket = mServerSocket[i];
+			Thread tcpThread = new Thread() {
+
+				public void run() {
+					byte[] header = new byte[4];
+					int socketTimeout = NetBase.theNetBase().config()
+							.getAsInt("net.timeout.socket", 5000);
+					try {
+						while (!isShutdown()) {
+							Socket sock = null;
+							try {
+								int xferSize = XFERSIZE[serverSocket.getLocalPort() - mBasePort];
+								// accept() blocks until a client connects. When it
+								// does, a new socket is created that communicates only
+								// with that client. That socket is returned.
+								sock = serverSocket.accept();
+								// We're going to read from sock, to get the message
+								// to echo, but we can't risk a client mistake
+								// blocking us forever. So, arrange for the socket
+								// to give up if no data arrives for a while.
+								sock.setSoTimeout(socketTimeout);
+								InputStream is = sock.getInputStream();
+								OutputStream os = sock.getOutputStream();
+								// Read the header. Either it gets here in one chunk
+								// or we ignore it. (That's not exactly the
+								// spec, admittedly.)
+								int len = is.read(header);
+								if (len != HEADER_STR.length())
+									throw new Exception("Bad header length: got "
+											+ len + " but wanted "
+											+ HEADER_STR.length());
+								String headerStr = new String(header);
+								if (!headerStr.equalsIgnoreCase(HEADER_STR))
+									throw new Exception("Bad header: got '"
+											+ headerStr + "' but wanted '"
+											+ HEADER_STR + "'");
+								os.write(RESPONSE_OKAY_STR.getBytes());
+
+								while (xferSize > 0) {
+									int size = UDP_PAYLOAD_SIZE;
+									if (xferSize < UDP_PAYLOAD_SIZE) {
+										size = xferSize;
+									}
+									byte[] returnPacket = new byte[size];
+									os.write(returnPacket, 0, returnPacket.length);
+								}
+
+							} catch (SocketTimeoutException e) {
+								// normal behavior, but we're done with the client
+								// we were talking with
+							} catch (Exception e) {
+								Log.i(TAG, "TCP thread caught "
+										+ e.getClass().getName() + " exception: "
+										+ e.getMessage());
+							} finally {
+								if (sock != null)
+									try {
+										sock.close();
+										sock = null;
+									} catch (Exception e) {
+									}
+							}
+						}
+					} catch (Exception e) {
+						Log.w(TAG, "TCP server thread exiting due to exception: "
+								+ e.getMessage());
+					} finally {
+						if (mServerSocket != null)
+							try {
+								serverSocket.close();
+							} catch (Exception e) {
+								
+							}
+					}
+				}
+			};
+			tcpThread.start();
+			tcpThreads[i] = tcpThread;
 		}
 	}
 
