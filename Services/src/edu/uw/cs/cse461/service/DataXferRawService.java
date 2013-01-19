@@ -68,18 +68,13 @@ public class DataXferRawService extends DataXferServiceBase implements
 		// dumpservericestate application
 		// to see ports are actually allocated.)
 		// allocate four ports
-//		mServerSockets = new ServerSocket[NPORTS];
-//		for (int i = 0; i < NPORTS; i++) {
-//			
-//		}
-		
-		mDatagramSocket = new DatagramSocket[NPORTS];
-		Thread[] dgramThreads = new Thread[NPORTS];
+		mDatagramSocket = new DatagramSocket[NPORTS];  // to keep track each of the datagram socket
+		Thread[] dgramThreads = new Thread[NPORTS];  // keep track each of the thread corresponding to a port
 		for (int i = 0; i < NPORTS; i++) {
 			mDatagramSocket[i] = new DatagramSocket(new InetSocketAddress(serverIP, mBasePort + i));
 			mDatagramSocket[i].setSoTimeout(NetBase.theNetBase().config()
 					.getAsInt("net.timeout.granularity", 500));
-			final DatagramSocket soc = mDatagramSocket[i];
+			final DatagramSocket soc = mDatagramSocket[i];  // need to do this because of inner class issue in java
 			// for datagram thread to wait for incoming connections
 			Thread dgramThread = new Thread() {
 				public void run() {
@@ -92,7 +87,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 					try {
 						while (!mAmShutdown) {
 							try {
-								int bytesLeft = XFERSIZE[soc.getLocalPort() - mBasePort];
+								int bytesLeft = XFERSIZE[soc.getLocalPort() - mBasePort];  // we get the amount of bytes we need to transfer
 								soc.receive(packet);
 								if (packet.getLength() < HEADER_STR.length())
 									throw new Exception("Bad header: length = "
@@ -105,9 +100,12 @@ public class DataXferRawService extends DataXferServiceBase implements
 											+ HEADER_STR + "'");
 								// after this point we are sure that the request is correct
 								// create a new buffer to send data back to the client
+								// This loop is for dividing the data into chucks of UDP payload size, 1000
 								while (bytesLeft > 0) {
 									int size = RESPONSE_OKAY_LEN + UDP_PAYLOAD_SIZE;
 									if (bytesLeft < UDP_PAYLOAD_SIZE) {
+										// if the bytes left is less than the payload size
+										// set the size to the "header + bytesleft"
 										size = RESPONSE_OKAY_LEN + bytesLeft;
 									}
 									byte[] returnPacket = new byte[size];
@@ -183,6 +181,8 @@ public class DataXferRawService extends DataXferServiceBase implements
 											+ HEADER_STR + "'");
 								os.write(RESPONSE_OKAY_STR.getBytes());
 
+								// Keep on sending the packet until the transfer size is 0.
+								// This is to prevent memory outage in the client side.
 								while (xferSize > 0) {
 									int size = UDP_PAYLOAD_SIZE;
 									if (xferSize < UDP_PAYLOAD_SIZE) {

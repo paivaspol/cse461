@@ -1,6 +1,7 @@
 package edu.uw.cs.cse461.consoleapps.solution;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -108,10 +109,11 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 	 */
 	@Override
 	public ElapsedTimeInterval udpPing(byte[] header, String hostIP, int udpPort, int socketTimeout, int nTrials) {
+		DatagramSocket socket = null;
 		try {
 			for (int i = 0; i < nTrials; i++) {
 				ElapsedTime.start("PingRaw_UDPTotalDelay");
-				DatagramSocket socket = new DatagramSocket();
+				socket = new DatagramSocket();
 				socket.setSoTimeout(socketTimeout); // wait at most a bounded time when receiving on this socket
 				int dataLength = header.length;
 				byte[] buf = header;
@@ -129,20 +131,26 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				if ( !rcvdHeader.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR) ) 
 					throw new Exception("Bad returned header: got '" + rcvdHeader + "' but wanted '" + EchoServiceBase.RESPONSE_OKAY_STR);
 				ElapsedTime.stop("PingRaw_UDPTotalDelay");
-				socket.close();
+				
 			}
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
+		} finally {
+			if (socket != null) {
+				socket.close();
+				socket = null;
+			}
 		}
 		return ElapsedTime.get("PingRaw_UDPTotalDelay");
 	}
 	
 	@Override
 	public ElapsedTimeInterval tcpPing(byte[] header, String hostIP, int tcpPort, int socketTimeout, int nTrials) {
+		Socket tcpSocket = null;
 		try {
 			for (int i = 0; i < nTrials; i++) {
 				ElapsedTime.start("PingRaw_TCPTotal");
-				Socket tcpSocket = new Socket(hostIP, tcpPort);
+				tcpSocket = new Socket(hostIP, tcpPort);
 				tcpSocket.setSoTimeout(socketTimeout);
 				InputStream is = tcpSocket.getInputStream();
 				OutputStream os = tcpSocket.getOutputStream();
@@ -161,10 +169,18 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				if ( !headerStr.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
 					throw new Exception("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
 				ElapsedTime.stop("PingRaw_TCPTotal");
-				tcpSocket.close();
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			if (tcpSocket != null) {
+				try {
+					tcpSocket.close();
+				} catch (IOException e) {
+					System.out.println(e);
+				}
+				tcpSocket = null;
+			}
 		}
 		return ElapsedTime.get("PingRaw_TCPTotal");
 	}
