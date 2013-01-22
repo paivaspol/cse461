@@ -132,12 +132,18 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 					throw new Exception("Bad returned header: got '" + rcvdHeader + "' but wanted '" + EchoServiceBase.RESPONSE_OKAY_STR);
 				ElapsedTime.stop("PingRaw_UDPTotalDelay");
 			}
+		} catch (SocketTimeoutException e) {
+			// This exception is thrown if we wait on receive() longer than the timeout
+			System.out.println("UDP socket timeout");
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		} finally {
 			if (socket != null) {
-				socket.close();
-				socket = null;
+				try {
+					socket.close();
+				} catch (Exception e) {
+					System.out.println("Exception: " + e.getMessage());
+				}
 			}
 		}
 		return ElapsedTime.get("PingRaw_UDPTotalDelay");
@@ -155,7 +161,7 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				OutputStream os = tcpSocket.getOutputStream();
 				
 				// send header
-				os.write(header);
+				os.write(header, 0, header.length);
 				tcpSocket.shutdownOutput();
 				// read the header.  Either the entire header arrives in one chunk, or we
 				// (mistakenly) reject it.
@@ -178,7 +184,6 @@ public class PingRaw extends NetLoadableConsoleApp implements PingRawInterface {
 				} catch (IOException e) {
 					System.out.println(e);
 				}
-				tcpSocket = null;
 			}
 		}
 		return ElapsedTime.get("PingRaw_TCPTotal");
