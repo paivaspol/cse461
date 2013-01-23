@@ -35,7 +35,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 
 	public static final int NPORTS = 4;
 	public static final int[] XFERSIZE = { 1000, 10000, 100000, 1000000 };
-	public static final int UDP_PAYLOAD_SIZE = 1000;
+	public static final int PAYLOAD_SIZE = 1000;
 	private int mBasePort;
 	private ServerSocket[] mServerSocket;
 	private DatagramSocket[] mDatagramSocket;
@@ -97,8 +97,8 @@ public class DataXferRawService extends DataXferServiceBase implements
 								// create a new buffer to send data back to the client
 								// This loop is for dividing the data into chucks of UDP payload size, 1000
 								while (bytesLeft > 0) {
-									int size = RESPONSE_OKAY_LEN + UDP_PAYLOAD_SIZE;
-									if (bytesLeft < UDP_PAYLOAD_SIZE) {
+									int size = RESPONSE_OKAY_LEN + PAYLOAD_SIZE;
+									if (bytesLeft < PAYLOAD_SIZE) {
 										// if the bytes left is less than the payload size
 										// set the size to the "header + bytesleft"
 										size = RESPONSE_OKAY_LEN + bytesLeft;
@@ -108,7 +108,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 											returnPacket, 0, HEADER_STR.length());  // put the header into the packet 
 									soc.send(new DatagramPacket(returnPacket, returnPacket.length,
 											packet.getAddress(), packet.getPort()));
-									bytesLeft -= UDP_PAYLOAD_SIZE;
+									bytesLeft -= PAYLOAD_SIZE;
 								}
 							} catch (SocketTimeoutException e) {
 								// socket timeout is normal
@@ -120,7 +120,11 @@ public class DataXferRawService extends DataXferServiceBase implements
 						}
 					} finally {
 						if (soc != null) {
-							soc.close();
+							try {
+								soc.close();
+							} catch (Exception e) {
+								System.out.println("Exception: " + e.getMessage());
+							}
 						}
 					}
 				}
@@ -179,9 +183,8 @@ public class DataXferRawService extends DataXferServiceBase implements
 								// Keep on sending the packet until the transfer size is 0.
 								// This is to prevent memory outage in the client side.
 								while (xferSize > 0) {
-									// TODO: why UDP_PAYLOAD_SIZE when this is TCP?
-									int size = UDP_PAYLOAD_SIZE;
-									if (xferSize < UDP_PAYLOAD_SIZE) {
+									int size = PAYLOAD_SIZE;
+									if (xferSize < PAYLOAD_SIZE) {
 										size = xferSize;
 									}
 									byte[] returnPacket = new byte[size];
@@ -199,8 +202,8 @@ public class DataXferRawService extends DataXferServiceBase implements
 								if (sock != null)
 									try {
 										sock.close();
-										sock = null;
 									} catch (Exception e) {
+										System.out.println("Exception: " + e.getMessage());
 									}
 							}
 						}
@@ -212,7 +215,7 @@ public class DataXferRawService extends DataXferServiceBase implements
 							try {
 								serverSocket.close();
 							} catch (Exception e) {
-								
+								System.out.println("Exception: " + e.getMessage());
 							}
 					}
 				}

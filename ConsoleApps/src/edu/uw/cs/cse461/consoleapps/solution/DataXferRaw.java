@@ -16,6 +16,7 @@ import edu.uw.cs.cse461.net.base.NetBase;
 import edu.uw.cs.cse461.net.base.NetLoadable.NetLoadableConsoleApp;
 import edu.uw.cs.cse461.service.DataXferRawService;
 import edu.uw.cs.cse461.service.DataXferServiceBase;
+import edu.uw.cs.cse461.service.EchoServiceBase;
 import edu.uw.cs.cse461.util.ConfigManager;
 import edu.uw.cs.cse461.util.SampledStatistic.TransferRate;
 import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
@@ -28,7 +29,6 @@ import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
 public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInterface {
 	private static final String TAG="DataXferRaw";
 	
-	private static final int RX_HEADER_SIZE = 4;
 	private static final int PAYLOAD_SIZE = 1000;
 	
 	// ConsoleApp's must have a constructor taking no arguments
@@ -137,22 +137,24 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 			socket.send(sendPacket);
 			// Received packet from server.
 			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-			byte[] rxData = new byte[PAYLOAD_SIZE + RX_HEADER_SIZE];
+			byte[] rxData = new byte[PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN];
 			DatagramPacket rxPacket = new DatagramPacket(rxData, rxData.length);
 			socket.receive(rxPacket);
-			int dataLength = rxPacket.getLength() - RX_HEADER_SIZE;
+			int dataLength = rxPacket.getLength() - EchoServiceBase.RESPONSE_LEN;
 			xferLength -= dataLength;
 			while (xferLength > 0) {
-				resultBuf.put(rxPacket.getData(), RX_HEADER_SIZE, dataLength);
+				resultBuf.put(rxPacket.getData(), EchoServiceBase.RESPONSE_LEN, dataLength);
 				socket.receive(rxPacket);
 				xferLength -= rxPacket.getLength();
 			}
 			return resultBuf.array();
-			// TODO: If I did not catch the exception, means it will still happen right? but no matter what it will reach finally right?
-			// as I still want the exception to propagate up.
 		} finally {
 			if (socket !=null) {
-				socket.close();
+				try {
+					socket.close();
+				} catch (Exception e) {
+					System.out.println("Exception: " + e.getMessage());
+				}
 			}
 		}
 	}
@@ -195,25 +197,29 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 			socket.setSoTimeout(socketTimeout);
 			OutputStream os = socket.getOutputStream();
 			// Send header
-			os.write(header);
+			os.write(header, 0, header.length);
 			socket.shutdownOutput();
 			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-			int headerAndDataSize = xferLength + RX_HEADER_SIZE;
-			byte[] buf = new byte[headerAndDataSize];
+			int headerAndPayloadSize = PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN;
+			byte[] buf = new byte[headerAndPayloadSize];
 			InputStream is = socket.getInputStream();
-			int readLen = is.read(buf, 0, headerAndDataSize) - RX_HEADER_SIZE;
-			resultBuf.put(buf, RX_HEADER_SIZE, readLen);
+			int readLen = is.read(buf, 0, headerAndPayloadSize) - EchoServiceBase.RESPONSE_LEN;
+			resultBuf.put(buf, EchoServiceBase.RESPONSE_LEN, readLen);
 			xferLength -= readLen;
 			// Read the data sent by server
 			while (xferLength > 0) {
-				readLen = is.read(buf, 0, xferLength);
+				readLen = is.read(buf, 0, PAYLOAD_SIZE);
 				resultBuf.put(buf, 0, readLen);
 				xferLength -= readLen;
 			}
 			return resultBuf.array();
 		} finally {
 			if (socket != null) {
-				socket.close();
+				try {
+					socket.close();
+				} catch (Exception e) {
+					System.out.println("Exception: " + e.getMessage());
+				}
 			}
 		}
 	}
