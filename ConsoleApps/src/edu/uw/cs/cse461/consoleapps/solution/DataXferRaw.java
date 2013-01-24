@@ -144,15 +144,13 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 			xferLength -= dataLength;
 			String headerStr = new String(rxData, 0, 4);
 			if ( !headerStr.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
-				throw new Exception("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
+				throw new IOException("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
 			while (xferLength > 0) {
 				resultBuf.put(rxPacket.getData(), EchoServiceBase.RESPONSE_LEN, dataLength);
 				socket.receive(rxPacket);
 				xferLength -= rxPacket.getLength();
 			}
 			return resultBuf.array();
-		} catch (Exception e) {
-			throw new IOException();
 		} finally {
 			if (socket !=null) {
 				socket.close();
@@ -209,7 +207,7 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 			xferLength -= readLen;
 			String headerStr = new String(buf, 0, 4);
 			if ( !headerStr.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
-				throw new Exception("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
+				throw new IOException("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
 			// Read the data sent by server
 			while (xferLength > 0) {
 				readLen = is.read(buf, 0, PAYLOAD_SIZE);
@@ -217,8 +215,6 @@ public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInt
 				xferLength -= readLen;
 			}
 			return resultBuf.array();
-		} catch (Exception e) {
-			throw new IOException();
 		} finally {
 			if (socket != null) {
 				socket.close();
