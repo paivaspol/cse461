@@ -142,11 +142,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public void sendMessage(byte[] buf) throws IOException {
 		OutputStream out = sock.getOutputStream();
-		ByteBuffer converter = ByteBuffer.allocate(buf.length);
-		converter.order(ByteOrder.LITTLE_ENDIAN);
-		converter.put(buf);
-		byte[] retval = converter.array();
-		out.write(retval);
+		out.write(buf);
 	}
 	
 	/**
@@ -194,16 +190,12 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 		if (size > maxReadLength) {
 			return null;
 		}
-		byte[] recvVal = new byte[size];
-		int code = in.read(recvVal);
+		byte[] retval = new byte[size];
+		int code = in.read(retval);
 		if (code == -1) {
 			// EOF detected
 			throw new EOFException("Unexpected EOF here");
 		}
-		byte[] retval = new byte[size];
-		ByteBuffer buf = ByteBuffer.wrap(recvVal);
-		buf.order(ByteOrder.BIG_ENDIAN);
-		buf.get(retval);
 		return retval;
 	}
 	
@@ -215,20 +207,19 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 
 	@Override
 	public int readMessageAsInt() throws IOException {
-		int retval = byteToInt(readMessageAsBytes());
-		return 0;
+		int retval = TCPMessageHandler.byteToInt(readMessageAsBytes());
+		return retval;
 	}
 	
 	@Override
 	public JSONArray readMessageAsJSONArray() throws IOException, JSONException {
-		JSONArray result = new JSONArray();
-		return null;
+		JSONArray retval = new JSONArray(readMessageAsString());
+		return retval;
 	}
 	
 	@Override
 	public JSONObject readMessageAsJSONObject() throws IOException, JSONException {
-		ByteBuffer buf = ByteBuffer.wrap(readMessageAsBytes());
-		
-		return null;
+		JSONObject retval = new JSONObject(readMessageAsString());
+		return retval;
 	}
 }
