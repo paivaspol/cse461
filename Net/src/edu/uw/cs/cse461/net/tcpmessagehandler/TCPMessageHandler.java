@@ -35,6 +35,9 @@ import edu.uw.cs.cse461.util.Log;
 public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	private static final String TAG="TCPMessageHandler";
 	
+	private Socket 	sock;
+	private int 	maxReadLength;
+	
 	//--------------------------------------------------------------------------------------
 	// helper routines
 	//--------------------------------------------------------------------------------------
@@ -63,7 +66,10 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	protected static int byteToInt(byte buf[]) {
 		// You need to implement this.  It's the inverse of intToByte().
-		return 0;
+		ByteBuffer b = ByteBuffer.wrap(buf);
+		b.order(ByteOrder.BIG_ENDIAN);
+		int retval = b.getInt();
+		return retval;
 	}
 
 	/**
@@ -72,12 +78,18 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 * @throws IOException
 	 */
 	public TCPMessageHandler(Socket sock) throws IOException {
+		this.sock = sock;
 	}
 	
 	/**
 	 * Closes the underlying socket and renders this TCPMessageHandler useless.
 	 */
 	public void close() {
+		try {
+			sock.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -87,7 +99,9 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public int setTimeout(int timeout) throws SocketException {
-		return 0;
+		int retval = sock.getSoTimeout();
+		sock.setSoTimeout(timeout);
+		return retval;
 	}
 	
 	/**
@@ -97,7 +111,9 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public boolean setNoDelay(boolean value) throws SocketException {
-		return false;
+		boolean retval = sock.getTcpNoDelay();
+		sock.setTcpNoDelay(value);
+		return retval;
 	}
 	
 	/**
@@ -106,7 +122,9 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public int setMaxReadLength(int maxLen) {
-		return 0;
+		int retval = getMaxReadLength();
+		this.maxReadLength = maxLen;
+		return retval;
 	}
 
 	/**
@@ -114,7 +132,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public int getMaxReadLength() {
-		return 0;
+		return this.maxReadLength;
 	}
 	
 	//--------------------------------------------------------------------------------------
@@ -123,6 +141,12 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	
 	@Override
 	public void sendMessage(byte[] buf) throws IOException {
+		OutputStream out = sock.getOutputStream();
+		ByteBuffer converter = ByteBuffer.allocate(buf.length);
+		converter.order(ByteOrder.LITTLE_ENDIAN);
+		converter.put(buf);
+		byte[] retval = converter.array();
+		out.write(retval);
 	}
 	
 	/**
@@ -130,6 +154,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public void sendMessage(String str) throws IOException {
+		sendMessage(str.getBytes());
 	}
 
 	/**
@@ -137,6 +162,8 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public void sendMessage(int value) throws IOException{
+		byte[] sendVal = TCPMessageHandler.intToByte(value);
+		sendMessage(sendVal);
 	}
 	
 	/**
@@ -144,6 +171,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public void sendMessage(JSONArray jsArray) throws IOException {
+		sendMessage(jsArray.toString());
 	}
 	
 	/**
@@ -151,6 +179,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	@Override
 	public void sendMessage(JSONObject jsObject) throws IOException {
+		sendMessage(jsObject.toString());
 	}
 	
 	//--------------------------------------------------------------------------------------
@@ -160,26 +189,46 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	
 	@Override
 	public byte[] readMessageAsBytes() throws IOException {
-		return null;
+		InputStream in = sock.getInputStream();
+		int size = in.available();
+		if (size > maxReadLength) {
+			return null;
+		}
+		byte[] recvVal = new byte[size];
+		int code = in.read(recvVal);
+		if (code == -1) {
+			// EOF detected
+			throw new EOFException("Unexpected EOF here");
+		}
+		byte[] retval = new byte[size];
+		ByteBuffer buf = ByteBuffer.wrap(recvVal);
+		buf.order(ByteOrder.BIG_ENDIAN);
+		buf.get(retval);
+		return retval;
 	}
 	
 	@Override
 	public String readMessageAsString() throws IOException {
-		return null;
+		String retval = new String(readMessageAsBytes());
+		return retval;
 	}
 
 	@Override
 	public int readMessageAsInt() throws IOException {
+		int retval = byteToInt(readMessageAsBytes());
 		return 0;
 	}
 	
 	@Override
 	public JSONArray readMessageAsJSONArray() throws IOException, JSONException {
+		JSONArray result = new JSONArray();
 		return null;
 	}
 	
 	@Override
 	public JSONObject readMessageAsJSONObject() throws IOException, JSONException {
+		ByteBuffer buf = ByteBuffer.wrap(readMessageAsBytes());
+		
 		return null;
 	}
 }
