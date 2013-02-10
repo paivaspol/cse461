@@ -142,7 +142,11 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public void sendMessage(byte[] buf) throws IOException {
 		OutputStream out = sock.getOutputStream();
-		out.write(buf);
+		byte[] lengthField = TCPMessageHandler.intToByte(buf.length);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(lengthField.length + buf.length);
+		byteBuffer.put(lengthField);  // put the size header
+		byteBuffer.put(buf, lengthField.length, buf.length);  // append the payload
+		out.write(byteBuffer.array());
 	}
 	
 	/**

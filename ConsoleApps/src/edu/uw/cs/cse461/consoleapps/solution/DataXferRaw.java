@@ -27,8 +27,8 @@ import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
  *
  */
 public class DataXferRaw extends NetLoadableConsoleApp implements DataXferRawInterface {
-	private static final String TAG="DataXferRaw";
 	
+	private static final String TAG="DataXferRaw";
 	private static final int PAYLOAD_SIZE = 1000;
 	
 	// ConsoleApp's must have a constructor taking no arguments
