@@ -79,6 +79,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	public TCPMessageHandler(Socket sock) throws IOException {
 		this.sock = sock;
+		this.maxReadLength = 2097148;
 	}
 	
 	/**
@@ -142,10 +143,10 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public void sendMessage(byte[] buf) throws IOException {
 		OutputStream out = sock.getOutputStream();
-		byte[] lengthField = TCPMessageHandler.intToByte(buf.length);
-		ByteBuffer byteBuffer = ByteBuffer.allocate(lengthField.length + buf.length);
-		byteBuffer.put(lengthField);  // put the size header
-		byteBuffer.put(buf, lengthField.length, buf.length);  // append the payload
+		byte[] lengthField = TCPMessageHandler.intToByte(buf.length-1);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(lengthField.length + buf.length-1);
+		byteBuffer.put(lengthField, 0, lengthField.length);  // put the size header
+		byteBuffer.put(buf, 0, buf.length-1);  // append the payload
 		out.write(byteBuffer.array());
 	}
 	
@@ -196,10 +197,9 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 		}
 		byte[] retval = new byte[size];
 		int code = in.read(retval);
-		if (code == -1) {
-			// EOF detected
+		if (code == -1) // EOF detected
 			throw new EOFException("Unexpected EOF here");
-		}
+		
 		return retval;
 	}
 	

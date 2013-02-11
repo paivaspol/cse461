@@ -13,10 +13,17 @@ import edu.uw.cs.cse461.util.ConfigManager;
 import edu.uw.cs.cse461.util.SampledStatistic.ElapsedTime;
 import edu.uw.cs.cse461.util.SampledStatistic.ElapsedTimeInterval;
 
+/**
+ * Sends a length 0 message to EchoTCPMessageHandlerService and measure the elapsed time to receive a reply.
+ * 
+ * @author leelee
+ *
+ */
+
 public class PingTCPMessageHandler extends NetLoadableConsoleApp implements PingTCPMessageHandlerInterface {
 	private static final String TAG="PingTCPMessageHandler";
 	
-	protected PingTCPMessageHandler() {
+	public PingTCPMessageHandler() {
 		super("pingtcpmessagehandler");
 	}
 
@@ -30,8 +37,8 @@ public class PingTCPMessageHandler extends NetLoadableConsoleApp implements Ping
 				tcpSocket = new Socket(hostIP, port);
 				tcpMsgHandler = new TCPMessageHandler(tcpSocket);
 				tcpMsgHandler.setTimeout(timeout);
-				
-				// send header
+				tcpMsgHandler.setMaxReadLength(EchoServiceBase.RESPONSE_LEN);
+
 				tcpMsgHandler.sendMessage(header);
 
 				// read the header.  Either the entire header arrives in one chunk, or we
