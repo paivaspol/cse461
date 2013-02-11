@@ -18,7 +18,8 @@ import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
 public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements DataXferTCPMessageHandlerInterface {
 
 	private static final String TAG = "DataXferTCPMessageHandler";
-	private static final int PAYLOAD_SIZE = 1000; 
+	private static final int PAYLOAD_SIZE = 1000;
+	private static final int SIZE_FIELD_LEN = 4;
 	
 	protected DataXferTCPMessageHandler(String name) {
 		super(name);
@@ -44,7 +45,7 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 			// sends the packet using TCPMessageHandler
 			messageHandler.sendMessage(encoding);
 			
-			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
+			ByteBuffer resultBuf = ByteBuffer.allocate(4 + xferLength);
 			int headerAndPayloadSize = PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN;
 			byte[] buf = new byte[headerAndPayloadSize];
 			InputStream is = socket.getInputStream();
