@@ -10,6 +10,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,10 +67,10 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	 */
 	protected static int byteToInt(byte buf[]) {
 		// You need to implement this.  It's the inverse of intToByte().
-		ByteBuffer b = ByteBuffer.wrap(buf);
-		b.order(ByteOrder.BIG_ENDIAN);
-		int retval = b.getInt();
-		return retval;
+		ByteBuffer b = ByteBuffer.allocate(buf.length);
+		b.order(ByteOrder.LITTLE_ENDIAN);
+		b.put(buf);
+		return b.getInt(0);
 	}
 
 	/**
@@ -143,10 +144,10 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public void sendMessage(byte[] buf) throws IOException {
 		OutputStream out = sock.getOutputStream();
-		byte[] lengthField = TCPMessageHandler.intToByte(buf.length-1);
-		ByteBuffer byteBuffer = ByteBuffer.allocate(lengthField.length + buf.length-1);
+		byte[] lengthField = TCPMessageHandler.intToByte(buf.length);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(lengthField.length + buf.length);
 		byteBuffer.put(lengthField, 0, lengthField.length);  // put the size header
-		byteBuffer.put(buf, 0, buf.length-1);  // append the payload
+		byteBuffer.put(buf, 0, buf.length);  // append the payload
 		out.write(byteBuffer.array());
 	}
 	
@@ -191,15 +192,14 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public byte[] readMessageAsBytes() throws IOException {
 		InputStream in = sock.getInputStream();
-		int size = in.available();
-		if (size > maxReadLength) {
-			return null;
-		}
-		byte[] retval = new byte[size];
-		int code = in.read(retval);
-		if (code == -1) // EOF detected
+		byte[] lengthArray = new byte[maxReadLength];
+		if (in.read(lengthArray) == -1) {
 			throw new EOFException("Unexpected EOF here");
-		
+		}
+		int length = TCPMessageHandler.byteToInt(lengthArray);
+		byte[] retval = new byte[length];
+		if (in.read(retval) == -1) // EOF detected
+			throw new EOFException("Unexpected EOF here");
 		return retval;
 	}
 	

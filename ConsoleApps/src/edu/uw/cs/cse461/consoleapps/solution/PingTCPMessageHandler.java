@@ -21,7 +21,7 @@ import edu.uw.cs.cse461.util.SampledStatistic.ElapsedTimeInterval;
  */
 
 public class PingTCPMessageHandler extends NetLoadableConsoleApp implements PingTCPMessageHandlerInterface {
-	private static final String TAG="PingTCPMessageHandler";
+	private static final String TAG="PingRaw";
 	
 	public PingTCPMessageHandler() {
 		super("pingtcpmessagehandler");
@@ -38,8 +38,10 @@ public class PingTCPMessageHandler extends NetLoadableConsoleApp implements Ping
 				tcpMsgHandler = new TCPMessageHandler(tcpSocket);
 				tcpMsgHandler.setTimeout(timeout);
 				tcpMsgHandler.setMaxReadLength(EchoServiceBase.RESPONSE_LEN);
+				tcpMsgHandler.setNoDelay(true);
 
 				tcpMsgHandler.sendMessage(header);
+				tcpMsgHandler.sendMessage(new byte[] {});
 
 				// read the header.  Either the entire header arrives in one chunk, or we
 				// (mistakenly) reject it.
