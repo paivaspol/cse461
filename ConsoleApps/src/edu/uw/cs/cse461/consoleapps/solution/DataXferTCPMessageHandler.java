@@ -121,33 +121,22 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 			socket = new Socket(hostIP, port);
 			socket.setSoTimeout(timeout);
 			TCPMessageHandler messageHandler = new TCPMessageHandler(socket);
-
 			// sends the header
 			messageHandler.sendMessage(header);
-
+			// sends the transfer size
 			JSONObject encoding = new JSONObject();
 			encoding.put("transferSize", xferLength);
-			System.out.println("header :" + header + " encoding: " + encoding);
-
-			// sends the packet using TCPMessageHandler
 			messageHandler.sendMessage(encoding);
 
 			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-//			int headerAndPayloadSize = PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN;
-			
 			byte[] result = messageHandler.readMessageAsBytes();
 			String resultHeader = new String(result);
-			if ( !resultHeader.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
+			if (!resultHeader.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
 				throw new IOException("Bad response header: got '" + resultHeader + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
-			
-//			int length = result.length;
-//			xferLength -= length;
 			while (xferLength > 0) {
 				result = messageHandler.readMessageAsBytes();
 				resultBuf.put(result);
 				xferLength -= result.length;
-				System.out.println("\tlen: " + xferLength);
-//				xferLength -= length;
 			}
 			return resultBuf.array();
 		} finally {
