@@ -30,12 +30,14 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 	
 	public DataXferTCPMessageHandler() {
 		super("dataxfertcpmessagehandler");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void run() throws Exception {
 		try {
+			
+			// dd
+			System.out.println("in run");
 
 			// Eclipse doesn't support System.console()
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -81,6 +83,10 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 				//-----------------------------------------------------
 				// TCP transfer
 				//-----------------------------------------------------
+				
+				
+				// dd
+				System.out.println("DataXferServiceBase header " + DataXferServiceBase.HEADER_STR);
 
 				TransferRateInterval tcpStats = DataXferRate(DataXferServiceBase.HEADER_STR, server, port, socketTimeout, xferLength, nTrials);
 
