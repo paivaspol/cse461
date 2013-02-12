@@ -18,7 +18,8 @@ import edu.uw.cs.cse461.util.SampledStatistic.TransferRateInterval;
 public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements DataXferTCPMessageHandlerInterface {
 
 	private static final String TAG = "DataXferTCPMessageHandler";
-	private static final int PAYLOAD_SIZE = 1000; 
+	private static final int PAYLOAD_SIZE = 1000;
+	private static final int SIZE_FIELD_LEN = 4;
 	
 	protected DataXferTCPMessageHandler(String name) {
 		super(name);
@@ -39,26 +40,27 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 			socket = new Socket(hostIP, port);
 			socket.setSoTimeout(timeout);
 			TCPMessageHandler messageHandler = new TCPMessageHandler(socket);
+
+			// sends the header
+			messageHandler.sendMessage(header);
+
 			JSONObject encoding = new JSONObject();
 			encoding.put("transferSize", xferLength);
+
 			// sends the packet using TCPMessageHandler
 			messageHandler.sendMessage(encoding);
-			
+
 			ByteBuffer resultBuf = ByteBuffer.allocate(xferLength);
-			int headerAndPayloadSize = PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN;
-			byte[] buf = new byte[headerAndPayloadSize];
-			InputStream is = socket.getInputStream();
-			int readLen = is.read(buf, 0, headerAndPayloadSize) - EchoServiceBase.RESPONSE_LEN;
-			resultBuf.put(buf, EchoServiceBase.RESPONSE_LEN, readLen);
-			xferLength -= readLen;
-			String headerStr = new String(buf, 0, 4);
-			if ( !headerStr.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
-				throw new IOException("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
-			// Read the data sent by server
+//			int headerAndPayloadSize = PAYLOAD_SIZE + EchoServiceBase.RESPONSE_LEN;
+			
+			byte[] result = messageHandler.readMessageAsBytes();
+			resultBuf.put(result);
+			int length = result.length;
+			xferLength -= length;
 			while (xferLength > 0) {
-				readLen = is.read(buf, 0, PAYLOAD_SIZE);
-				resultBuf.put(buf, 0, readLen);
-				xferLength -= readLen;
+				result = messageHandler.readMessageAsBytes();
+				resultBuf.put(result);
+				xferLength -= length;
 			}
 			return resultBuf.array();
 		} finally {
