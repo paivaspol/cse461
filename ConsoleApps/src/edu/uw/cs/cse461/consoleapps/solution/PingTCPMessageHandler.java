@@ -16,7 +16,7 @@ import edu.uw.cs.cse461.util.SampledStatistic.ElapsedTimeInterval;
 public class PingTCPMessageHandler extends NetLoadableConsoleApp implements PingTCPMessageHandlerInterface {
 	private static final String TAG="PingTCPMessageHandler";
 	
-	protected PingTCPMessageHandler() {
+	public PingTCPMessageHandler() {
 		super("pingtcpmessagehandler");
 	}
 
