@@ -30,19 +30,22 @@ public class PingTCPMessageHandler extends NetLoadableConsoleApp implements Ping
 				tcpSocket = new Socket(hostIP, port);
 				tcpMsgHandler = new TCPMessageHandler(tcpSocket);
 				tcpMsgHandler.setTimeout(timeout);
+				tcpMsgHandler.setNoDelay(true);
 				
 				// send header
 				tcpMsgHandler.sendMessage(header);
+				tcpMsgHandler.sendMessage(new byte[] {});
 
 				// read the header.  Either the entire header arrives in one chunk, or we
 				// (mistakenly) reject it.
-				String response = tcpMsgHandler.readMessageAsString();
-				int len = response.length();
-				if ( len != EchoServiceBase.RESPONSE_LEN )
-					throw new Exception("Bad response header length: got " + len + " but expected " + header.length());
-				String headerStr = response.substring(0, 4);  // TCP packet might return something else after the header too
+				String responseHeader = tcpMsgHandler.readMessageAsString();
+				int headerLen = responseHeader.length();
+				if ( headerLen != EchoServiceBase.RESPONSE_LEN )
+					throw new Exception("Bad response header length: got " + headerLen + " but expected " + header.length());
+				String headerStr = responseHeader.substring(0, 4);  // TCP packet might return something else after the header too
 				if ( !headerStr.equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
 					throw new Exception("Bad response header: got '" + headerStr + "' but expected '" + EchoServiceBase.RESPONSE_OKAY_STR + "'");
+				tcpMsgHandler.readMessageAsString();
 				ElapsedTime.stop("PingTCPMessageHandler_Total");
 			}
 		} catch (Exception e) {
