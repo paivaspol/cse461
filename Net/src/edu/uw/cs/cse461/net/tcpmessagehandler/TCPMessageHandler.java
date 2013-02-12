@@ -192,7 +192,7 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	@Override
 	public byte[] readMessageAsBytes() throws IOException {
 		InputStream in = sock.getInputStream();
-		byte[] lengthArray = new byte[maxReadLength];
+		byte[] lengthArray = new byte[4];
 		if (in.read(lengthArray) == -1) {
 			throw new EOFException("Unexpected EOF here");
 		}
