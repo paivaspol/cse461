@@ -48,14 +48,11 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 				if ( server == null ) return;
 				if ( server.equals("exit")) return;
 			}
-
-			int basePort = config.getAsInt("dataxferraw.server.baseport", -1);
-			if ( basePort == -1 ) {
-				System.out.print("Enter port number, or empty line to exit: ");
-				String portStr = console.readLine();
-				if ( portStr == null || portStr.trim().isEmpty() ) return;
-				basePort = Integer.parseInt(portStr);
-			}
+			System.out.println("Server location: " + server);
+			System.out.print("Enter port number, or empty line to exit: ");
+			String portStr = console.readLine();
+			if ( portStr == null || portStr.trim().isEmpty() ) return;
+			int basePort = Integer.parseInt(portStr);
 			
 			int socketTimeout = config.getAsInt("net.timeout.socket", -1);
 			if ( socketTimeout < 0 ) {
@@ -69,12 +66,13 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 			String trialStr = console.readLine();
 			int nTrials = Integer.parseInt(trialStr);
 
-			for ( int index=0; index<DataXferRawService.NPORTS; index++ ) {
-
+			while (true) {
+				System.out.print("Enter amount of data to transfer (-1 to exit): ");
+				int xferLength = Integer.parseInt(console.readLine());
+				if (xferLength == -1) {
+					break;
+				}
 				TransferRate.clear();
-				
-				int port = basePort + index;
-				int xferLength = DataXferRawService.XFERSIZE[index];
 
 				System.out.println("\n" + xferLength + " bytes");
 
@@ -82,7 +80,7 @@ public class DataXferTCPMessageHandler extends NetLoadableConsoleApp implements 
 				// TCP transfer
 				//-----------------------------------------------------
 
-				TransferRateInterval tcpStats = DataXferRate(DataXferServiceBase.HEADER_STR, server, port, socketTimeout, xferLength, nTrials);
+				TransferRateInterval tcpStats = DataXferRate(DataXferServiceBase.HEADER_STR, server, basePort, socketTimeout, xferLength, nTrials);
 
 				System.out.println("\nTCP: xfer rate = " + String.format("%9.0f", tcpStats.mean() * 1000.0) + " bytes/sec.");
 				System.out.println("TCP: failure rate = " + String.format("%5.1f", tcpStats.failureRate()) +
