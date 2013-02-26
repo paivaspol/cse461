@@ -82,14 +82,8 @@ public class PingRPC extends NetLoadableConsoleApp implements PingRPCInterface {
 	@Override
 	public ElapsedTimeInterval ping(JSONObject header, String hostIP, int port,
 			int timeout, int nTrials) throws Exception {
-		Socket tcpSocket = null;
-		TCPMessageHandler tcpMsgHandler = null;
 		try {
 			ElapsedTime.start("PingRPC_Total");
-			tcpSocket = new Socket(hostIP, port);
-			tcpMsgHandler = new TCPMessageHandler(tcpSocket);
-			tcpMsgHandler.setTimeout(timeout);
-			tcpMsgHandler.setNoDelay(true);
 			// send message
 			JSONObject args = new JSONObject().put(EchoRPCService.HEADER_KEY, header);
 			JSONObject response = RPCCall.invoke(hostIP, port, "echorpc", "echo", args, timeout );
@@ -105,8 +99,6 @@ public class PingRPC extends NetLoadableConsoleApp implements PingRPCInterface {
 			ElapsedTime.stop("PingRPC_Total");
 		} catch (IOException e) {
 			System.out.println(e);
-		} finally {
-			tcpMsgHandler.close();
 		}
 		return ElapsedTime.get("PingRPC_Total");
 	}
