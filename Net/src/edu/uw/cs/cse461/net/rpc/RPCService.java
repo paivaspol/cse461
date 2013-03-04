@@ -34,6 +34,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	}	
 	private List<TCPMessageHandler> socketList = new ArrayList<TCPMessageHandler>();
 	private List<SocketState> socketStateList = new ArrayList<SocketState>();
+	private ConfigManager config = NetBase.theNetBase().config();
+	private String host = config.getProperty("net.host.name", "");
+	private int id;
 	
 	/**
 	 * Constructor.  Creates the Java ServerSocket and binds it to a port.
@@ -47,13 +50,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	public RPCService() throws Exception {
 		super("rpc");
 		callableMethodStorage = new HashMap<String, HashMap<String, RPCCallableMethod>>();
-		ConfigManager config = NetBase.theNetBase().config();
 		rpcPort = config.getAsInt("rpc.server.port", 0);
 		String serverIP = IPFinder.localIP();
 		serverSocket = new ServerSocket();
 		serverSocket.bind(new InetSocketAddress(serverIP, rpcPort));
 		serverSocket.setSoTimeout(NetBase.theNetBase().config().getAsInt("net.timeout.granularity", 500));
-		
+		id = 0;
 		Thread thread = new Thread() {
 			public void run() {
 				run();
@@ -68,7 +70,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 */
 	@Override
 	public void run() {
-		// TODO(leelee): RPCCalleeSocket?
 		try {
 			while(!mAmShutdown) {
 				while(true){
@@ -93,14 +94,13 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 							String type = message.getString("type");
 							int clientId = message.getInt("id");
 							
-							// TODO(leelee): Double check on what should be returned as a host.
-							
 							if (type.equals("control")) {
 								// Format normal response message that has the id field, host fiels, callid field and also
 								// type field.
 								JSONObject responseMessage = new JSONObject();
-								responseMessage.put("id", i);
-								responseMessage.put("host", "");
+								responseMessage.put("id", id);
+								id++;
+								responseMessage.put("host", host);
 								responseMessage.put("callid", clientId);
 								responseMessage.put("type", "OK");
 								
@@ -115,8 +115,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									JSONObject connectionJsonObject = new JSONObject();
 									connectionJsonObject.put("connection", "keep-alive");
 									responseMessage.put("value", connectionJsonObject);
-									
-									// TODO(leelee): Must the response id be fixed for every client?
 								}
 								tcpSocket.sendMessage(responseMessage);
 								
@@ -127,8 +125,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 							
 								// Format response message
 								JSONObject responseMessage = new JSONObject();
-								responseMessage.put("id", i);
-								responseMessage.put("host", "");
+								responseMessage.put("id", id);
+								id++;
+								responseMessage.put("host", host);
 								responseMessage.put("callid", clientId);
 								
 								// Invoke the method if it exists
