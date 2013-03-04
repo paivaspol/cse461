@@ -34,7 +34,7 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 				"dataxfer", header);
 		if (response == null)
 			throw new IOException("RPC failed; response is null");
-		JSONObject rcvdHeader = response.optJSONObject(DataXferRPCService.HEADER_KEY);
+		JSONObject rcvdHeader = response.getJSONObject(DataXferRPCService.HEADER_KEY);
 		
 		if ( rcvdHeader == null || !rcvdHeader.has(DataXferRPCService.HEADER_TAG_KEY)||
 				!rcvdHeader.getString(DataXferRPCService.HEADER_TAG_KEY).equalsIgnoreCase(DataXferRPCService.RESPONSE_OKAY_STR))

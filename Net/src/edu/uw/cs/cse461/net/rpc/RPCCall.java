@@ -1,7 +1,9 @@
 package edu.uw.cs.cse461.net.rpc;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 
 import edu.uw.cs.cse461.net.base.NetBase;
 import edu.uw.cs.cse461.net.base.NetLoadable.NetLoadableService;
+import edu.uw.cs.cse461.net.tcpmessagehandler.TCPMessageHandler;
 import edu.uw.cs.cse461.util.Log;
 
 /**
@@ -30,7 +33,28 @@ import edu.uw.cs.cse461.util.Log;
  *
  */
 public class RPCCall extends NetLoadableService {
+	
 	private static final String TAG="RPCCall";
+	
+	private static final String ID_KEY = "id";
+	private static final String HOST_KEY = "host";
+	private static final String ACTION_KEY = "action";
+	private static final String TYPE_KEY = "type";
+	private static final String OPTIONS_KEY = "options";
+	private static final String CONNECTION_KEY = "connection";
+	private static final String MESSAGE_KEY_SHORT = "msg";
+	private static final String MESSAGE_KEY_LONG = "message";
+	private static final String APP_KEY = "app";
+	private static final String METHOD_KEY = "method";
+	private static final String ARG_KEY = "args";
+	private static final String VALUE_KEY = "value";
+	
+	private static final int CLEANUP_TIME = 300;	// default idle time for cleaning up
+	
+	private static HashMap<String, Socket> cache = new HashMap<String, Socket>();
+	private static HashMap<String, Timer> cleaner = new HashMap<String, Timer>();
+	
+	private static int idCounter = 1;
 
 	//-------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------
@@ -114,15 +138,120 @@ public class RPCCall extends NetLoadableService {
 			int socketTimeout,        // max time to wait for reply
 			boolean tryAgain          // true if an invocation failure on a persistent connection should cause a re-try of the call, false to give up
 			) throws JSONException, IOException {
-		return null;
+		// For persistent connection, we will do a mapping from IP,port(String typed) --> Socket
+		Socket socket = null;
+		JSONObject retval = null;
+		final String key = ip + "," + port;
+		socket = cache.get(key);
+		if (socket == null) {
+			socket = new Socket(ip, port);
+			socket.setSoTimeout(socketTimeout);
+		} else {
+			Timer t = cleaner.get(key);
+			t.cancel();
+		}
+		// create the timer and put it in the map
+		Timer timer = scheduleCleaner(key);
+		cleaner.put(key, timer);
+		
+		String hostName = socket.getLocalAddress().toString();
+		TCPMessageHandler messageHandler = new TCPMessageHandler(socket);
+		// First, send the connect message
+		connectToHost(hostName, messageHandler);
+		// TODO: double check if we need to check for the received callerid and the current id or not
+		// Got the success response, we are ready to invoke methods
+		JSONObject recvObject = invokeRemoteMethod(ip, serviceName, method, userRequest, hostName,
+				messageHandler);
+		if (recvObject.has(VALUE_KEY)) {
+			retval = recvObject.getJSONObject(VALUE_KEY);
+		}
+		return retval;
+	}
+
+	private Timer scheduleCleaner(final String key) {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				Socket sock = cache.get(key);
+				try {
+					sock.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}, CLEANUP_TIME * 1000);
+		return timer;
 	}
 	
+	private JSONObject connectToHost(String ip, TCPMessageHandler messageHandler)
+			throws JSONException, IOException {
+		JSONObject optionsMessage = new JSONObject().put(CONNECTION_KEY, "keep-alive");  // set it to be persistent
+		JSONObject connectMessage = new JSONObject().put(ID_KEY, idCounter)
+													.put(HOST_KEY, ip)
+													.put(ACTION_KEY, "connect")
+													.put(TYPE_KEY, "control")
+													.put(OPTIONS_KEY, optionsMessage);
+		return sendMessage(ip, messageHandler, connectMessage);
+	}
+	
+	private JSONObject invokeRemoteMethod(String ip, String serviceName,
+			String method, JSONObject userRequest, String hostName,
+			TCPMessageHandler messageHandler) throws JSONException, IOException {
+		JSONObject invokeMessage = new JSONObject().put(ID_KEY, idCounter)
+												   .put(APP_KEY, serviceName)
+												   .put(HOST_KEY, hostName)
+												   .put(METHOD_KEY, method)
+												   .put(TYPE_KEY, "invoke")
+												   .put(ARG_KEY, userRequest);
+		return sendMessage(ip, messageHandler, invokeMessage);
+	}
+
+	private JSONObject sendMessage(String ip, TCPMessageHandler messageHandler,
+			JSONObject invokeMessage) throws IOException, JSONException {
+		JSONObject recvObject = null;
+		try {
+			messageHandler.sendMessage(invokeMessage);
+			idCounter++;
+			recvObject = messageHandler.readMessageAsJSONObject();
+			if (!didSucceed(recvObject)) {
+				// we cannot establish the connection
+				String msg = "";
+				if (recvObject.has(MESSAGE_KEY_LONG)) {
+					msg = recvObject.getString(MESSAGE_KEY_LONG);
+				} else {
+					msg = recvObject.getString(MESSAGE_KEY_SHORT);
+				}
+				throw new IOException(msg);
+			}
+		} catch (SocketTimeoutException e) {
+			Socket removed = cache.remove(ip);
+			removed.close();
+		}
+		return recvObject;
+	}
+
+	// Returns whether the message received was a success or not
+	private boolean didSucceed(JSONObject recvObject) throws JSONException {
+		return recvObject.has(TYPE_KEY) && recvObject.getString(TYPE_KEY).equalsIgnoreCase("ok");
+	}
+
+	
+
 	@Override
 	public void shutdown() {
+		for (String host : cache.keySet()) {
+			Socket sock = cache.get(host);
+			try {
+				sock.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
 	@Override
 	public String dumpState() {
-		return "Current persistent connections are ...";
+		return "Current persistent connections are ..." + cache.values();
 	}
 }
