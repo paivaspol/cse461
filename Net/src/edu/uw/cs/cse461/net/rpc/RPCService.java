@@ -294,7 +294,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 			HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
 			Set<String> methodsSet = map.keySet();
 			for (String methodName: methodsSet) {
-				result += serviceName + ": " + methodName + "\n";
+				result += serviceName + ": " + methodName + "()\n";
 			}
 		}
 		return result;
