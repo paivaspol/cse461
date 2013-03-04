@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -209,6 +210,7 @@ public class RPCCall extends NetLoadableService {
 
 	private JSONObject sendMessage(String ip, TCPMessageHandler messageHandler,
 			JSONObject invokeMessage) throws IOException, JSONException {
+		System.out.println("RPCCall: sending message: " + invokeMessage);
 		JSONObject recvObject = null;
 		try {
 			messageHandler.sendMessage(invokeMessage);
@@ -243,7 +245,9 @@ public class RPCCall extends NetLoadableService {
 		for (String host : cache.keySet()) {
 			Socket sock = cache.get(host);
 			try {
-				sock.close();
+				if (sock != null) {
+					sock.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
