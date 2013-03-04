@@ -175,7 +175,9 @@ public class RPCCall extends NetLoadableService {
 			public void run() {
 				Socket sock = cache.get(key);
 				try {
-					sock.close();
+					if (sock != null) {
+						sock.close();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
