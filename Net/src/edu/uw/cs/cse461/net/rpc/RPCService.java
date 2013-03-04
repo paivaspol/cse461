@@ -7,6 +7,7 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONObject;
 
@@ -37,6 +38,8 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	private ConfigManager config = NetBase.theNetBase().config();
 	private String host = config.getProperty("net.host.name", "");
 	private int id;
+	private String serverIP;
+	private int numOfPersistentConnection;
 	
 	/**
 	 * Constructor.  Creates the Java ServerSocket and binds it to a port.
@@ -51,11 +54,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		super("rpc");
 		callableMethodStorage = new HashMap<String, HashMap<String, RPCCallableMethod>>();
 		rpcPort = config.getAsInt("rpc.server.port", 0);
-		String serverIP = IPFinder.localIP();
+		serverIP = IPFinder.localIP();
 		serverSocket = new ServerSocket();
 		serverSocket.bind(new InetSocketAddress(serverIP, rpcPort));
 		serverSocket.setSoTimeout(NetBase.theNetBase().config().getAsInt("net.timeout.granularity", 500));
 		id = 0;
+		numOfPersistentConnection = 0;
 		Thread thread = new Thread() {
 			public void run() {
 				run();
@@ -110,6 +114,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 										message.getJSONObject("option").getString("connection").equals("keep-alive")) {
 									// Set the state to persistent
 									socketStateList.set(i, SocketState.PERSISTENT);
+									numOfPersistentConnection++;
 									// Add extra key-value in the response message that indicates that we agree with
 									// setting up persistent connection
 									JSONObject connectionJsonObject = new JSONObject();
@@ -143,7 +148,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									
 								} else {
 									// No such method, send error message
-									responseMessage.put("message", "some error message");
+									responseMessage.put("message", "apps and/or mehods are not being registered");
 									responseMessage.put("type", "ERROR");
 									responseMessage.put("callargs", message);
 								}
@@ -156,8 +161,14 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 								}
 								
 							} else {
-								// TODO(leelee): Not sure if this really needed.
-								throw new Exception("Illegal type message");
+								JSONObject responseMessage = new JSONObject();
+								responseMessage.put("id", id);
+								id++;
+								responseMessage.put("host", host);
+								responseMessage.put("callid", clientId);
+								responseMessage.put("message", "type not supported");
+								responseMessage.put("type", "ERROR");
+								responseMessage.put("callargs", message);
 							}
 								
 							// TODO(leelee): can there be a case where caller actually want persistent connection
@@ -165,11 +176,20 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						}
 					} catch (SocketTimeoutException e) {
 						Log.e(TAG, "Timed out waiting for data on tcp connection");
+						// Clean up the cache
+						if (socketStateList.get(i) == SocketState.PERSISTENT) {
+							numOfPersistentConnection--;
+						}
+						socketStateList.set(i, SocketState.COMPLETED);
 					} catch (EOFException e) {
 						// normal termination of loop
 						Log.d(TAG, "EOF on tcpMessageHandlerSocket.readMessageAsString()");
 					} catch (Exception e) {
 						Log.i(TAG, "Unexpected exception while handling connection: " + e.getMessage());
+						// Clean up the cache
+						if (socketStateList.get(i) == SocketState.PERSISTENT) {
+							numOfPersistentConnection--;
+						}
 						socketStateList.set(i, SocketState.COMPLETED);
 					} finally {
 						if ( socketStateList.get(i) == SocketState.COMPLETED) { 
@@ -244,8 +264,36 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	}
 	
 	@Override
+	/**
+	 * Example output:
+	 * 
+	 * rpc Service:
+	 * Listening at 127.0.0.1:46120
+     * 0 current connections being persisted by service
+     * Registered apps/methods:
+     * dataxferrpc:	dataxfer()
+     * echorpc:	echo()
+	 * rpccall Service:
+     * Total persisted connection count: 0
+	 */
 	public String dumpState() {
 		// TODO(leelee): I guess I can only work on this when we have the provided solution jar??
-		return "";
+		return "rpc Service:\nListerning at " + serverIP + ":" + rpcPort + "\n" +
+				numOfPersistentConnection + " current connections being persisted by service\n" +
+				"Registered apps/methods";
+	}
+	
+	private String getRegisteredAppsMethods() {
+		Set<String> set = callableMethodStorage.keySet();
+		String result = "";
+		for (String serviceName: set) {
+			HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
+			Set<String> methodsSet = map.keySet();
+			for (String methodName: methodsSet) {
+				
+			}
+			result += serviceName + ": " + methodSet;
+		}
+		return result;
 	}
 }
