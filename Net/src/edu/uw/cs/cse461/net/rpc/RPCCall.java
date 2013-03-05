@@ -5,8 +5,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,7 +14,6 @@ import org.json.JSONObject;
 import edu.uw.cs.cse461.net.base.NetBase;
 import edu.uw.cs.cse461.net.base.NetLoadable.NetLoadableService;
 import edu.uw.cs.cse461.net.tcpmessagehandler.TCPMessageHandler;
-import edu.uw.cs.cse461.util.Log;
 
 /**
  * Class implementing the caller side of RPC -- the RPCCall.invoke() method.
@@ -48,11 +45,12 @@ public class RPCCall extends NetLoadableService {
 	private static final String METHOD_KEY = "method";
 	private static final String ARG_KEY = "args";
 	private static final String VALUE_KEY = "value";
+	private static final String CALL_ID_KEY = "callid";
 	
-	private static final int CLEANUP_TIME = 300;	// default idle time for cleaning up
+	private static final int CLEANUP_TIME = 300000;	// default idle time for cleaning up, 5 minutes, 300000ms
 	
-	private static HashMap<String, Socket> cache = new HashMap<String, Socket>();
-	private static HashMap<String, Timer> cleaner = new HashMap<String, Timer>();
+	private static HashMap<String, Socket> cache;
+	private static HashMap<String, Timer> cleaner;
 	
 	private static int idCounter = 1;
 
@@ -138,42 +136,76 @@ public class RPCCall extends NetLoadableService {
 			int socketTimeout,        // max time to wait for reply
 			boolean tryAgain          // true if an invocation failure on a persistent connection should cause a re-try of the call, false to give up
 			) throws JSONException, IOException {
+		if (cache == null) {
+			cache = new HashMap<String, Socket>();
+		}
+		if (cleaner == null) {
+			cleaner = new HashMap<String, Timer>();
+		}
 		// For persistent connection, we will do a mapping from IP,port(String typed) --> Socket
-		Socket socket = null;
 		JSONObject retval = null;
 		final String key = ip + "," + port;
-		socket = cache.get(key);
+		Socket socket = cache.get(key);
+		TCPMessageHandler messageHandler = null;
+		String hostName = "";
 		if (socket == null) {
 			socket = new Socket(ip, port);
 			socket.setSoTimeout(socketTimeout);
+			hostName = socket.getLocalAddress().toString();
+			messageHandler = new TCPMessageHandler(socket);
+			// First, send the connect message
+			JSONObject recvObject = connectToHost(hostName, messageHandler, key);
+			// Got the success response, persist the connection
+			if (recvObject.has(TYPE_KEY) && recvObject.getString(TYPE_KEY).equalsIgnoreCase("OK")) {
+				cache.put(key, socket);	
+			}
 		} else {
 			Timer t = cleaner.get(key);
 			t.cancel();
+			hostName = socket.getLocalAddress().toString();
+			socket.setSoTimeout(socketTimeout);
+			messageHandler = new TCPMessageHandler(socket);
 		}
 		// create the timer and put it in the map
-		Timer timer = scheduleCleaner(key);
+		Timer timer = scheduleCleaner(key);	
+		// and we are ready to invoke methods
 		cleaner.put(key, timer);
-		
-		String hostName = socket.getLocalAddress().toString();
-		TCPMessageHandler messageHandler = new TCPMessageHandler(socket);
-		// First, send the connect message
-		connectToHost(hostName, messageHandler);
-		// TODO: double check if we need to check for the received callerid and the current id or not
-		// Got the success response, we are ready to invoke methods
-		JSONObject recvObject = invokeRemoteMethod(ip, serviceName, method, userRequest, hostName,
-				messageHandler);
-		if (recvObject.has(VALUE_KEY)) {
-			retval = recvObject.getJSONObject(VALUE_KEY);
+		try {
+			JSONObject recvObject = invokeRemoteMethod(ip, serviceName, method, userRequest, hostName,
+				messageHandler, key);
+			if (recvObject.has(VALUE_KEY)) {
+				retval = recvObject.getJSONObject(VALUE_KEY);
+			}
+		} catch (SocketException e) {
+			if (tryAgain) {
+				socket = new Socket(ip, port);
+				socket.setSoTimeout(socketTimeout);
+				messageHandler = new TCPMessageHandler(socket);
+				connectToHost(hostName, messageHandler, key);
+				JSONObject recvObject = invokeRemoteMethod(ip, serviceName, method, userRequest, hostName,
+						messageHandler, key);
+				if (recvObject.has(VALUE_KEY)) {
+					retval = recvObject.getJSONObject(VALUE_KEY);
+				}
+			} else {
+				if (socket != null) {
+					socket.close();
+				}
+				throw new SocketException(e.getMessage());
+			}
 		}
 		return retval;
 	}
 
+	// schedule a cleaner task to CLEANUP_TIME, assuming that if there's no traffic for CLEANUP_TIME
+	// it is safe to close the socket rather than wasting memory to keep track of the socket
 	private Timer scheduleCleaner(final String key) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				Socket sock = cache.get(key);
+				Socket sock = cache.remove(key);
+				cleaner.remove(key);
 				try {
 					if (sock != null) {
 						sock.close();
@@ -182,11 +214,12 @@ public class RPCCall extends NetLoadableService {
 					e.printStackTrace();
 				}
 			}
-		}, CLEANUP_TIME * 1000);
+		}, CLEANUP_TIME);
 		return timer;
 	}
 	
-	private JSONObject connectToHost(String ip, TCPMessageHandler messageHandler)
+	// Connects to the host
+	private JSONObject connectToHost(String ip, TCPMessageHandler messageHandler, String key)
 			throws JSONException, IOException {
 		JSONObject optionsMessage = new JSONObject().put(CONNECTION_KEY, "keep-alive");  // set it to be persistent
 		JSONObject connectMessage = new JSONObject().put(ID_KEY, idCounter)
@@ -194,28 +227,35 @@ public class RPCCall extends NetLoadableService {
 													.put(ACTION_KEY, "connect")
 													.put(TYPE_KEY, "control")
 													.put(OPTIONS_KEY, optionsMessage);
-		return sendMessage(ip, messageHandler, connectMessage);
+		return sendMessage(ip, messageHandler, connectMessage, key);
 	}
 	
+	// Invokes the remote method
 	private JSONObject invokeRemoteMethod(String ip, String serviceName,
 			String method, JSONObject userRequest, String hostName,
-			TCPMessageHandler messageHandler) throws JSONException, IOException {
+			TCPMessageHandler messageHandler, String key) throws JSONException, IOException {
 		JSONObject invokeMessage = new JSONObject().put(ID_KEY, idCounter)
 												   .put(APP_KEY, serviceName)
 												   .put(HOST_KEY, hostName)
 												   .put(METHOD_KEY, method)
 												   .put(TYPE_KEY, "invoke")
 												   .put(ARG_KEY, userRequest);
-		return sendMessage(ip, messageHandler, invokeMessage);
+		return sendMessage(ip, messageHandler, invokeMessage, key);
 	}
 
+	// sends the message over the network
 	private JSONObject sendMessage(String ip, TCPMessageHandler messageHandler,
-			JSONObject invokeMessage) throws IOException, JSONException {
+			JSONObject invokeMessage, String key) throws IOException, JSONException {
 		JSONObject recvObject = null;
 		try {
-			messageHandler.sendMessage(invokeMessage);
-			idCounter++;
+			messageHandler.sendMessage(invokeMessage);			
 			recvObject = messageHandler.readMessageAsJSONObject();
+			if (recvObject.has(CALL_ID_KEY)) {
+				int callid = recvObject.getInt(CALL_ID_KEY);
+				if (callid != idCounter) {
+					throw new IOException("The ids do not match");
+				}
+			}
 			if (!didSucceed(recvObject)) {
 				// we cannot establish the connection
 				String msg = "";
@@ -226,9 +266,24 @@ public class RPCCall extends NetLoadableService {
 				}
 				throw new IOException(msg);
 			}
+			idCounter++;
 		} catch (SocketTimeoutException e) {
-			Socket removed = cache.remove(ip);
-			removed.close();
+			Socket removed = cache.remove(key);
+			cleaner.remove(key);
+			if (removed != null) {
+				removed.close();
+			}
+			String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e.getMessage();
+			throw new IOException(errorMessage);
+		} catch (SocketException se) {
+			throw new SocketException(se.getMessage());
+		} catch (IOException e1) {
+			Socket removed = cache.remove(key);
+			if (removed != null) {
+				removed.close();
+			}
+			String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e1.getMessage();
+			throw new IOException(errorMessage);
 		}
 		return recvObject;
 	}
@@ -238,22 +293,22 @@ public class RPCCall extends NetLoadableService {
 		return recvObject.has(TYPE_KEY) && recvObject.getString(TYPE_KEY).equalsIgnoreCase("ok");
 	}
 
-	
-
 	@Override
 	public void shutdown() {
 		for (String host : cache.keySet()) {
 			Socket sock = cache.get(host);
 			try {
-				sock.close();
+				if (sock != null)
+					sock.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			cache.remove(host);
 		}
 	}
 
 	@Override
 	public String dumpState() {
-		return "Current persistent connections are ..." + cache.values();
+		return "Current persistent connections are ... " + cache.size();
 	}
 }

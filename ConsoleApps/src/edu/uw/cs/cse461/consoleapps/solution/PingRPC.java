@@ -56,9 +56,7 @@ public class PingRPC extends NetLoadableConsoleApp implements PingRPCInterface {
 
 				int socketTimeout = config.getAsInt("net.timeout.socket", 5000);
 
-				System.out.println("Host: " + targetIP);
-				System.out.println("tcp port: " + targetTCPPort);
-				System.out.println("trials: " + nTrials);
+				System.out.println("Host: " + targetIP + ", TCP port: " + targetTCPPort);
 
 				ElapsedTimeInterval tcpResult = null;
 
@@ -68,7 +66,10 @@ public class PingRPC extends NetLoadableConsoleApp implements PingRPCInterface {
 					tcpResult = ping(header, targetIP, targetTCPPort, socketTimeout, nTrials);
 				}
 
-				if ( tcpResult != null ) System.out.println("TCP: " + String.format("%.2f msec (%d failures)", tcpResult.mean(), tcpResult.nAborted()));
+				if ( tcpResult != null ) { 
+					System.out.println("TCP Mean time: " + String.format("%.2f msec (%d failures)", tcpResult.mean(), tcpResult.nAborted()));
+				}
+				
 
 			} catch (Exception e) {
 				System.out.println("Exception: " + e.getMessage());
@@ -83,20 +84,32 @@ public class PingRPC extends NetLoadableConsoleApp implements PingRPCInterface {
 	public ElapsedTimeInterval ping(JSONObject header, String hostIP, int port,
 			int timeout, int nTrials) throws Exception {
 		try {
-			ElapsedTime.start("PingRPC_Total");
-			// send message
-			JSONObject args = new JSONObject().put(EchoRPCService.HEADER_KEY, header);
-			JSONObject response = RPCCall.invoke(hostIP, port, "echorpc", "echo", args, timeout );
-			if ( response == null ) throw new IOException("RPC failed; response is null");
-			
-			// examine response
-			JSONObject rcvdHeader = response.optJSONObject(EchoRPCService.HEADER_KEY);
-			if ( rcvdHeader == null || !rcvdHeader.has(EchoRPCService.HEADER_TAG_KEY)||
-					!rcvdHeader.getString(EchoRPCService.HEADER_TAG_KEY).equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
-				throw new IOException("Bad response header: got '" + rcvdHeader.toString() +
-						               "' but wanted a JSONOBject with key '" + EchoRPCService.HEADER_TAG_KEY + "' and string value '" +
-						               	EchoServiceBase.RESPONSE_OKAY_STR + "'");
-			ElapsedTime.stop("PingRPC_Total");
+			for (int i = 0; i < nTrials; i++) {
+				ElapsedTime.start("PingRPC_Total");
+				// send message
+				JSONObject args = new JSONObject().put(EchoRPCService.HEADER_KEY, header).put(EchoRPCService.PAYLOAD_KEY, "");
+				JSONObject response = RPCCall.invoke(hostIP, port, "echorpc", "echo", args, timeout );
+				if ( response == null ) throw new IOException("RPC failed; response is null");
+				
+				// examine response
+				Object objHeader = response.get(EchoRPCService.HEADER_KEY);
+				if (objHeader instanceof String) {
+					String strHeader = (String) objHeader;
+					if (!strHeader.equalsIgnoreCase(EchoRPCService.RESPONSE_OKAY_STR)) {
+						throw new IOException("Bad response header: got '" + objHeader.toString() +
+					               "' but wanted a JSON OBject with key '" + EchoRPCService.HEADER_TAG_KEY + "' and string value '" +
+					               	EchoServiceBase.RESPONSE_OKAY_STR + "'");
+					}
+				} else if (objHeader instanceof JSONObject) {
+					JSONObject rcvdHeader = (JSONObject) objHeader;
+					if ( rcvdHeader == null || !rcvdHeader.has(EchoRPCService.HEADER_TAG_KEY)||
+							!rcvdHeader.getString(EchoRPCService.HEADER_TAG_KEY).equalsIgnoreCase(EchoServiceBase.RESPONSE_OKAY_STR))
+						throw new IOException("Bad response header: got '" + rcvdHeader.toString() +
+								               "' but wanted a JSONOBject with key '" + EchoRPCService.HEADER_TAG_KEY + "' and string value '" +
+								               	EchoServiceBase.RESPONSE_OKAY_STR + "'");
+				}
+				ElapsedTime.stop("PingRPC_Total");
+			}
 		} catch (IOException e) {
 			System.out.println(e);
 		}
