@@ -40,7 +40,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	private int id;
 	private String serverIP;
 	private int numOfCurrentPersistentConnection;
-	private int numOfPersistentConnection;
 	
 	/**
 	 * Constructor.  Creates the Java ServerSocket and binds it to a port.
@@ -68,7 +67,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		Log.e(TAG, "5");
 		id = 0;
 		numOfCurrentPersistentConnection = 0;
-		numOfPersistentConnection = 0; 
 		Thread thread = new Thread(this, "RPCService");
 		thread.start();
 	}
@@ -125,7 +123,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									// Set the state to persistent
 									socketStateList.set(i, SocketState.PERSISTENT);
 									numOfCurrentPersistentConnection++;
-									numOfPersistentConnection++;
 									// Add extra key-value in the response message that indicates that we agree with
 									// setting up persistent connection
 									JSONObject connectionJsonObject = new JSONObject();
@@ -210,9 +207,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						}
 						socketStateList.set(i, SocketState.COMPLETED);
 					} finally {
-						// p
-						System.out.println("in inner finally");
-						
 						if ( socketStateList.get(i) == SocketState.COMPLETED) { 
 							try {
 								socketList.get(i).close(); 
@@ -229,8 +223,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		} catch (Exception e) {
 			Log.w(TAG, "Server thread exiting due to exception: " + e.getMessage());
 		} finally {
-			// p
-			System.out.println("in finally");
 			if ( serverSocket != null )  {
 				try {
 					serverSocket.close();
@@ -254,12 +246,23 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	public synchronized void registerHandler(String serviceName, String methodName, RPCCallableMethod method) throws Exception {
 		// Put the serviceName, methodName and RPCCallableMethod into the hashmap of hashmap iff the service
 		// name is not a key inside the hashmap yet.
+		
+		// p
+		System.out.println("registering method " + serviceName + " " + methodName);
+		
 		HashMap<String, RPCCallableMethod> methodNameToRPCCallableMethodMap = callableMethodStorage.get(serviceName);
 		if (methodNameToRPCCallableMethodMap == null) {
 			methodNameToRPCCallableMethodMap = new HashMap<String, RPCCallableMethod>();
 		}
+		
 		methodNameToRPCCallableMethodMap.put(methodName, method);
+		// p
+		System.out.println("size 1: " + methodNameToRPCCallableMethodMap.size());
+		
 		callableMethodStorage.put(serviceName, methodNameToRPCCallableMethodMap);
+		
+		// p
+		System.out.println("size 2: " + callableMethodStorage.size());
 		
 	}
 	
@@ -300,11 +303,10 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 */
 	@Override
 	public String dumpState() {
-		return "Listerning at " + serverIP + ":" + rpcPort + "\n" +
+		return "Listening at " + serverIP + ":" + rpcPort + "\n" +
 				numOfCurrentPersistentConnection + " current connections being persisted by service\n" +
 				"Registered apps/methods:" + "\n" +
-				getRegisteredAppsMethods() +
-				"Total persisted connection count: " + numOfPersistentConnection;
+				getRegisteredAppsMethods();
 	}
 	
 	/**
@@ -314,12 +316,18 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
      * echorpc:	echo()
 	 */
 	private String getRegisteredAppsMethods() {
+		// p
+		System.out.println("in getRegisteredAppsMethods");
 		String result = "";
 		if (callableMethodStorage != null) {
+			// p
+			System.out.println("callableMethodStorage not null");
 			Set<String> set = callableMethodStorage.keySet();
 			for (String serviceName: set) {
 				HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
 				if (map != null) {
+					// p
+					System.out.println("map not null");
 					Set<String> methodsSet = map.keySet();
 					for (String methodName: methodsSet) {
 						result += serviceName + ": " + methodName + "()\n";
