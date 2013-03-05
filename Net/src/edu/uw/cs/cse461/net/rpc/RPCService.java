@@ -100,10 +100,15 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						while (true) {
 							// Read message as JSONObject.
 							JSONObject message = tcpSocket.readMessageAsJSONObject();
+							// p
+							System.out.println("read message " + message);
 							String type = message.getString("type");
 							int clientId = message.getInt("id");
-							
+							// p
+							System.out.println("type: " + type);
 							if (type.equals("control")) {
+								// p
+								System.out.println("type = control");
 								// Format normal response message that has the id field, host fiels, callid field and also
 								// type field.
 								JSONObject responseMessage = new JSONObject();
@@ -114,9 +119,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 								responseMessage.put("type", "OK");
 								
 								// Check if the caller wants persistent connection
-								if (!message.isNull("option") &&
-										!message.getJSONObject("option").isNull("connection") &&
-										message.getJSONObject("option").getString("connection").equals("keep-alive")) {
+								if (!message.isNull("options") &&
+										!message.getJSONObject("options").isNull("connection") &&
+										message.getJSONObject("options").getString("connection").equals("keep-alive")) {
 									// Set the state to persistent
 									socketStateList.set(i, SocketState.PERSISTENT);
 									numOfCurrentPersistentConnection++;
@@ -128,8 +133,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									responseMessage.put("value", connectionJsonObject);
 								}
 								tcpSocket.sendMessage(responseMessage);
-								
+								// p
+								System.out.println("message sent " + responseMessage.toString());
 							} else if (type.equals("invoke")) {
+								
+								//
+								System.out.println("in invoke");
 								// Get the method that is being invoked
 								String app = message.getString("app");
 								String method = message.getString("method");
@@ -167,6 +176,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 								}
 								
 							} else {
+								// p
+								System.out.println("in else type");
+								
 								JSONObject responseMessage = new JSONObject();
 								responseMessage.put("id", id);
 								id++;
@@ -198,6 +210,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						}
 						socketStateList.set(i, SocketState.COMPLETED);
 					} finally {
+						// p
+						System.out.println("in inner finally");
+						
 						if ( socketStateList.get(i) == SocketState.COMPLETED) { 
 							try {
 								socketList.get(i).close(); 
@@ -214,6 +229,8 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		} catch (Exception e) {
 			Log.w(TAG, "Server thread exiting due to exception: " + e.getMessage());
 		} finally {
+			// p
+			System.out.println("in finally");
 			if ( serverSocket != null )  {
 				try {
 					serverSocket.close();
@@ -269,7 +286,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		return rpcPort;
 	}
 	
-	@Override
 	/**
 	 * Example output:
 	 * 
@@ -282,23 +298,32 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 * rpccall Service:
      * Total persisted connection count: 0
 	 */
+	@Override
 	public String dumpState() {
-		return "rpc Service:\nListerning at " + serverIP + ":" + rpcPort + "\n" +
+		return "Listerning at " + serverIP + ":" + rpcPort + "\n" +
 				numOfCurrentPersistentConnection + " current connections being persisted by service\n" +
-				"Registered apps/methods:" +
+				"Registered apps/methods:" + "\n" +
 				getRegisteredAppsMethods() +
 				"Total persisted connection count: " + numOfPersistentConnection;
 	}
 	
+	/**
+	 * @return the string that contains all the registered apps and/or method.
+	 * Eg:
+     * dataxferrpc:	dataxfer()
+     * echorpc:	echo()
+	 */
 	private String getRegisteredAppsMethods() {
 		String result = "";
 		if (callableMethodStorage != null) {
 			Set<String> set = callableMethodStorage.keySet();
 			for (String serviceName: set) {
 				HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
-				Set<String> methodsSet = map.keySet();
-				for (String methodName: methodsSet) {
-					result += serviceName + ": " + methodName + "()\n";
+				if (map != null) {
+					Set<String> methodsSet = map.keySet();
+					for (String methodName: methodsSet) {
+						result += serviceName + ": " + methodName + "()\n";
+					}
 				}
 			}	
 		}
