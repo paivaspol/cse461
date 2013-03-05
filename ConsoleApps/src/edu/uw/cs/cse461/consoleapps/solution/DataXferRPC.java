@@ -35,7 +35,6 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 		if (response == null)
 			throw new IOException("RPC failed; response is null");
 		JSONObject rcvdHeader = response.getJSONObject(DataXferRPCService.HEADER_KEY);
-		
 		if ( rcvdHeader == null || !rcvdHeader.has(DataXferRPCService.HEADER_TAG_KEY)||
 				!rcvdHeader.getString(DataXferRPCService.HEADER_TAG_KEY).equalsIgnoreCase(DataXferRPCService.RESPONSE_OKAY_STR))
 			throw new IOException("Bad response header: got '" + rcvdHeader.toString() +
@@ -44,8 +43,7 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 		
 		if (!response.has(DataXferRPCService.DATA_KEY))
 			throw new IOException("Data key not found");
-		
-		String resultBytes = response.getString(DataXferRPCService.DATA_KEY);
+		String resultBytes = (String) response.get(DataXferRPCService.DATA_KEY);
 		return Base64.decode(resultBytes);
 	}
 
@@ -53,7 +51,9 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 	public TransferRateInterval DataXferRate(JSONObject header, String hostIP,
 			int port, int timeout, int nTrials) {
 		int xferLength = 0;
+		JSONObject args = null;
 		try {
+			args = new JSONObject().put(DataXferRPCService.HEADER_KEY, header);
 			xferLength = header.getInt(DataXferRPCService.DATA_LENGTH_KEY);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 		for (int trial = 0; trial < nTrials; trial++) {
 			try {
 				TransferRate.start("tcp");
-				DataXfer(header, hostIP, port, timeout);
+				DataXfer(args, hostIP, port, timeout);
 				TransferRate.stop("tcp", xferLength);
 			} catch (Exception e) {
 				TransferRate.abort("tcp", xferLength);
@@ -116,15 +116,14 @@ public class DataXferRPC extends NetLoadableConsoleApp implements
 				}
 				TransferRate.clear();
 
-				System.out.println("\n" + xferLength + " bytes");
+				System.out.println("Transferring "+ xferLength + " bytes from " + server + ":" + portStr);
 
 				// -----------------------------------------------------
 				// TCP transfer
 				// -----------------------------------------------------
-				JSONObject header = new JSONObject().put(DataXferRPCService.HEADER_TAG_KEY, DataXferRPCService.HEADER_STR);
-				JSONObject args = new JSONObject().put(DataXferRPCService.HEADER_KEY, header).put(
-						DataXferRPCService.DATA_LENGTH_KEY, xferLength);
-				TransferRateInterval tcpStats = DataXferRate(args, server,
+				JSONObject header = new JSONObject().put(DataXferRPCService.HEADER_TAG_KEY, DataXferRPCService.HEADER_STR)
+													.put(DataXferRPCService.DATA_LENGTH_KEY, xferLength);
+				TransferRateInterval tcpStats = DataXferRate(header, server,
 						basePort, socketTimeout, nTrials);
 
 				System.out.println("\nTCP: xfer rate = "

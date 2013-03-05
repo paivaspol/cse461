@@ -198,8 +198,13 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 		}
 		int length = TCPMessageHandler.byteToInt(lengthArray);
 		byte[] retval = new byte[length];
-		if (in.read(retval) == -1) // EOF detected
-			throw new EOFException("Unexpected EOF here");
+		int leftToRead = length;
+		while (leftToRead > 0) {
+			int result = in.read(retval, length - leftToRead, leftToRead);
+			leftToRead -= result;
+			if (result == -1) // EOF detected
+				throw new EOFException("Unexpected EOF here");
+		}
 		return retval;
 	}
 	
@@ -223,7 +228,8 @@ public class TCPMessageHandler implements TCPMessageHandlerInterface {
 	
 	@Override
 	public JSONObject readMessageAsJSONObject() throws IOException, JSONException {
-		JSONObject retval = new JSONObject(readMessageAsString());
+		String msg = readMessageAsString();
+		JSONObject retval = new JSONObject(msg);
 		return retval;
 	}
 }
