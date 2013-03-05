@@ -52,19 +52,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 */
 	public RPCService() throws Exception {
 		super("rpc");
-		Log.e(TAG, "1");
 		callableMethodStorage = new HashMap<String, HashMap<String, RPCCallableMethod>>();
 		rpcPort = config.getAsInt("rpc.server.port", 0);
 		serverIP = IPFinder.localIP();
-		Log.e(TAG, "2");
 		serverSocket = new ServerSocket();
-		Log.e(TAG, "3");
-		Log.e("serverIP", serverIP);
-		Log.e("rpcPort", rpcPort + "");
 		serverSocket.bind(new InetSocketAddress(serverIP, rpcPort));
-		Log.e(TAG, "4");
 		serverSocket.setSoTimeout(NetBase.theNetBase().config().getAsInt("net.timeout.granularity", 500));
-		Log.e(TAG, "5");
 		id = 0;
 		numOfCurrentPersistentConnection = 0;
 		Thread thread = new Thread(this, "RPCService");
@@ -98,15 +91,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						while (true) {
 							// Read message as JSONObject.
 							JSONObject message = tcpSocket.readMessageAsJSONObject();
-							// p
-							System.out.println("read message " + message);
 							String type = message.getString("type");
 							int clientId = message.getInt("id");
-							// p
-							System.out.println("type: " + type);
 							if (type.equals("control")) {
-								// p
-								System.out.println("type = control");
 								// Format normal response message that has the id field, host fiels, callid field and also
 								// type field.
 								JSONObject responseMessage = new JSONObject();
@@ -130,12 +117,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									responseMessage.put("value", connectionJsonObject);
 								}
 								tcpSocket.sendMessage(responseMessage);
-								// p
-								System.out.println("message sent " + responseMessage.toString());
 							} else if (type.equals("invoke")) {
-								
-								//
-								System.out.println("in invoke");
 								// Get the method that is being invoked
 								String app = message.getString("app");
 								String method = message.getString("method");
@@ -171,11 +153,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 								if (socketStateList.get(i) != SocketState.PERSISTENT) {
 									socketStateList.set(i, SocketState.COMPLETED);
 								}
-								
 							} else {
-								// p
-								System.out.println("in else type");
-								
 								JSONObject responseMessage = new JSONObject();
 								responseMessage.put("id", id);
 								id++;
