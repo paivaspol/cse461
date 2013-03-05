@@ -166,6 +166,9 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 								
 							// TODO(leelee): can there be a case where caller actually want persistent connection
 							// at the beginning but changed it to not want persistent connection after that
+							
+							// TODO(leelee): can there be a case where the client send control message again when
+							// the connection is still there?
 						}
 					} catch (SocketTimeoutException e) {
 						Log.e(TAG, "Timed out waiting for data on tcp connection");
