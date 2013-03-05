@@ -48,8 +48,6 @@ public class DataXferRPCService extends DataXferServiceBase implements
 	 * @throws JSONException
 	 */
 	public JSONObject _dataxfer(JSONObject args) throws Exception {
-        System.out.println("test2");
-        Log.e("MYTAG", "test2");
 		JSONObject header = args.getJSONObject(DataXferRPCService.HEADER_KEY);
 		if ( header == null  || !header.has(HEADER_TAG_KEY) || !header.getString(HEADER_TAG_KEY).equalsIgnoreCase(HEADER_STR) )
 			throw new Exception("Missing or incorrect header value: '" + header + "'");
