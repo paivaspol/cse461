@@ -8,7 +8,6 @@ import edu.uw.cs.cse461.net.base.NetLoadableInterface.NetLoadableServiceInterfac
 import edu.uw.cs.cse461.net.rpc.RPCCallableMethod;
 import edu.uw.cs.cse461.net.rpc.RPCService;
 import edu.uw.cs.cse461.util.Base64;
-import edu.uw.cs.cse461.util.Log;
 
 /**
  * Implements DataXfer that uses RPCService.
@@ -29,8 +28,6 @@ public class DataXferRPCService extends DataXferServiceBase implements
 
 	public DataXferRPCService() throws Exception {
 		super("dataxferrpc");
-        Log.e("MYTAG", "test");
-
 		// Set up the method descriptor variable to refer to this->_dataxfer()
 		dataxfer = new RPCCallableMethod(this, "_dataxfer");
 		// Register the method with the RPC service as externally invocable method "dataxfer"
