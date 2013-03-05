@@ -53,20 +53,23 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 */
 	public RPCService() throws Exception {
 		super("rpc");
+		Log.e(TAG, "1");
 		callableMethodStorage = new HashMap<String, HashMap<String, RPCCallableMethod>>();
 		rpcPort = config.getAsInt("rpc.server.port", 0);
 		serverIP = IPFinder.localIP();
+		Log.e(TAG, "2");
 		serverSocket = new ServerSocket();
+		Log.e(TAG, "3");
+		Log.e("serverIP", serverIP);
+		Log.e("rpcPort", rpcPort + "");
 		serverSocket.bind(new InetSocketAddress(serverIP, rpcPort));
+		Log.e(TAG, "4");
 		serverSocket.setSoTimeout(NetBase.theNetBase().config().getAsInt("net.timeout.granularity", 500));
+		Log.e(TAG, "5");
 		id = 0;
 		numOfCurrentPersistentConnection = 0;
-		numOfPersistentConnection = 0;
-		Thread thread = new Thread() {
-			public void run() {
-				run();
-			}
-		}; 
+		numOfPersistentConnection = 0; 
+		Thread thread = new Thread(this, "RPCService");
 		thread.start();
 	}
 	
@@ -288,14 +291,16 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	}
 	
 	private String getRegisteredAppsMethods() {
-		Set<String> set = callableMethodStorage.keySet();
 		String result = "";
-		for (String serviceName: set) {
-			HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
-			Set<String> methodsSet = map.keySet();
-			for (String methodName: methodsSet) {
-				result += serviceName + ": " + methodName + "()\n";
-			}
+		if (callableMethodStorage != null) {
+			Set<String> set = callableMethodStorage.keySet();
+			for (String serviceName: set) {
+				HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
+				Set<String> methodsSet = map.keySet();
+				for (String methodName: methodsSet) {
+					result += serviceName + ": " + methodName + "()\n";
+				}
+			}	
 		}
 		return result;
 	}
