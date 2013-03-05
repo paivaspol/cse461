@@ -246,24 +246,13 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	public synchronized void registerHandler(String serviceName, String methodName, RPCCallableMethod method) throws Exception {
 		// Put the serviceName, methodName and RPCCallableMethod into the hashmap of hashmap iff the service
 		// name is not a key inside the hashmap yet.
-		
-		// p
-		System.out.println("registering method " + serviceName + " " + methodName);
-		
 		HashMap<String, RPCCallableMethod> methodNameToRPCCallableMethodMap = callableMethodStorage.get(serviceName);
 		if (methodNameToRPCCallableMethodMap == null) {
 			methodNameToRPCCallableMethodMap = new HashMap<String, RPCCallableMethod>();
 		}
 		
 		methodNameToRPCCallableMethodMap.put(methodName, method);
-		// p
-		System.out.println("size 1: " + methodNameToRPCCallableMethodMap.size());
-		
-		callableMethodStorage.put(serviceName, methodNameToRPCCallableMethodMap);
-		
-		// p
-		System.out.println("size 2: " + callableMethodStorage.size());
-		
+		callableMethodStorage.put(serviceName, methodNameToRPCCallableMethodMap);		
 	}
 	
 	/**
@@ -316,18 +305,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
      * echorpc:	echo()
 	 */
 	private String getRegisteredAppsMethods() {
-		// p
-		System.out.println("in getRegisteredAppsMethods");
 		String result = "";
 		if (callableMethodStorage != null) {
-			// p
-			System.out.println("callableMethodStorage not null");
 			Set<String> set = callableMethodStorage.keySet();
 			for (String serviceName: set) {
-				HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(set);
+				HashMap<String, RPCCallableMethod> map = callableMethodStorage.get(serviceName);
 				if (map != null) {
-					// p
-					System.out.println("map not null");
 					Set<String> methodsSet = map.keySet();
 					for (String methodName: methodsSet) {
 						result += serviceName + ": " + methodName + "()\n";

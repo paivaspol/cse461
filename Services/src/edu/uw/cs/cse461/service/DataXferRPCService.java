@@ -19,14 +19,6 @@ import edu.uw.cs.cse461.util.Log;
 public class DataXferRPCService extends DataXferServiceBase implements
 		NetLoadableServiceInterface {
 
-	public static final String HEADER_STR = "xfer";
-	public static final byte[] HEADER_BYTES = HEADER_STR.getBytes();
-	public static final int HEADER_LEN = HEADER_BYTES.length;
-
-	public static final String RESPONSE_OKAY_STR = "okay";
-	public static final byte[] RESPONSE_OKAY_BYTES = RESPONSE_OKAY_STR.getBytes();
-	public static final int RESPONSE_OKAY_LEN = RESPONSE_OKAY_BYTES.length;
-
 	// Keys for JSON objects
 	public static final String HEADER_KEY = "header";
 	public static final String HEADER_TAG_KEY = "tag";
@@ -34,7 +26,6 @@ public class DataXferRPCService extends DataXferServiceBase implements
 	public static final String DATA_KEY = "data";
 
 	private RPCCallableMethod dataxfer;
-	private int maxLength;
 
 	public DataXferRPCService() throws Exception {
 		super("dataxferrpc");
@@ -44,7 +35,6 @@ public class DataXferRPCService extends DataXferServiceBase implements
 		dataxfer = new RPCCallableMethod(this, "_dataxfer");
 		// Register the method with the RPC service as externally invocable method "dataxfer"
 		((RPCService)NetBase.theNetBase().getService("rpc")).registerHandler(loadablename(), "dataxfer", dataxfer);
-		maxLength = NetBase.theNetBase().config().getAsInt("dataxferrpc.maxlength", 14000000);
 	}
 
 	/**
