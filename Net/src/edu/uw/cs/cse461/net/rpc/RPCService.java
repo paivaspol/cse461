@@ -280,6 +280,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	}
 	
 	/**
+	 * Dumpstate
 	 * @return the string that contains all the registered apps and/or method.
 	 * Eg:
      * dataxferrpc:	dataxfer()
