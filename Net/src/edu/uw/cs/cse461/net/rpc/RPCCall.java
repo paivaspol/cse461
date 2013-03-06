@@ -49,8 +49,8 @@ public class RPCCall extends NetLoadableService {
 	
 	private static final int CLEANUP_TIME = 300000;	// default idle time for cleaning up, 5 minutes, 300000ms
 	
-	private static HashMap<String, Socket> cache;
-	private static HashMap<String, Timer> cleaner;
+	private static HashMap<String, Socket> cache = new HashMap<String, Socket>();
+	private static HashMap<String, Timer> cleaner = new HashMap<String, Timer>();
 	
 	private static int idCounter = 1;
 
@@ -136,12 +136,6 @@ public class RPCCall extends NetLoadableService {
 			int socketTimeout,        // max time to wait for reply
 			boolean tryAgain          // true if an invocation failure on a persistent connection should cause a re-try of the call, false to give up
 			) throws JSONException, IOException {
-		if (cache == null) {
-			cache = new HashMap<String, Socket>();
-		}
-		if (cleaner == null) {
-			cleaner = new HashMap<String, Timer>();
-		}
 		// For persistent connection, we will do a mapping from IP,port(String typed) --> Socket
 		JSONObject retval = null;
 		final String key = ip + "," + port;
@@ -309,6 +303,7 @@ public class RPCCall extends NetLoadableService {
 
 	@Override
 	public String dumpState() {
+//		return "Hello RPCCall";
 		return "Current persistent connections are ... " + cache.size();
 	}
 }
