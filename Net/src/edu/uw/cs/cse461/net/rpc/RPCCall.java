@@ -46,6 +46,7 @@ public class RPCCall extends NetLoadableService {
 	private static final String ARG_KEY = "args";
 	private static final String VALUE_KEY = "value";
 	private static final String CALL_ID_KEY = "callid";
+	private static final String KEEP_ALIVE_VALUE = "keep-alive";
 	
 	private static final int CLEANUP_TIME = 300000;	// default idle time for cleaning up, 5 minutes, 300000ms
 	
@@ -150,7 +151,8 @@ public class RPCCall extends NetLoadableService {
 			// First, send the connect message
 			JSONObject recvObject = connectToHost(hostName, messageHandler, key);
 			// Got the success response, persist the connection
-			if (recvObject.has(TYPE_KEY) && recvObject.getString(TYPE_KEY).equalsIgnoreCase("OK")) {
+			if (recvObject.has(TYPE_KEY) && recvObject.getString(TYPE_KEY).equalsIgnoreCase("OK")
+				&& recvObject.has(VALUE_KEY) && recvObject.getJSONObject(VALUE_KEY).getString(CONNECTION_KEY).equalsIgnoreCase(KEEP_ALIVE_VALUE)) {
 				cache.put(key, socket);	
 			}
 		} else {
@@ -269,8 +271,6 @@ public class RPCCall extends NetLoadableService {
 			}
 			String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e.getMessage();
 			throw new IOException(errorMessage);
-		} catch (SocketException se) {
-			throw new SocketException(se.getMessage());
 		} catch (IOException e1) {
 			Socket removed = cache.remove(key);
 			if (removed != null) {
@@ -303,7 +303,6 @@ public class RPCCall extends NetLoadableService {
 
 	@Override
 	public String dumpState() {
-//		return "Hello RPCCall";
 		return "Current persistent connections are ... " + cache.size();
 	}
 }
