@@ -48,7 +48,7 @@ public class RPCCall extends NetLoadableService {
 	private static final String CALL_ID_KEY = "callid";
 	private static final String KEEP_ALIVE_VALUE = "keep-alive";
 	
-	private static final int CLEANUP_TIME = 300000;	// default idle time for cleaning up, 5 minutes, 300000ms
+	private static final int CLEANUP_TIME = 10000;	// default idle time for cleaning up, 5 minutes, 300000ms
 	
 	private static HashMap<String, Socket> cache = new HashMap<String, Socket>();
 	private static HashMap<String, Timer> cleaner = new HashMap<String, Timer>();
@@ -174,15 +174,7 @@ public class RPCCall extends NetLoadableService {
 			}
 		} catch (SocketException e) {
 			if (tryAgain) {
-				socket = new Socket(ip, port);
-				socket.setSoTimeout(socketTimeout);
-				messageHandler = new TCPMessageHandler(socket);
-				connectToHost(hostName, messageHandler, key);
-				JSONObject recvObject = invokeRemoteMethod(ip, serviceName, method, userRequest, hostName,
-						messageHandler, key);
-				if (recvObject.has(VALUE_KEY)) {
-					retval = recvObject.getJSONObject(VALUE_KEY);
-				}
+				_invoke(ip, port, serviceName, method, userRequest, socketTimeout, false);
 			} else {
 				if (socket != null) {
 					socket.close();
@@ -200,6 +192,7 @@ public class RPCCall extends NetLoadableService {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
+				System.out.println("cleaning up cache...");
 				Socket sock = cache.remove(key);
 				cleaner.remove(key);
 				try {
@@ -264,22 +257,25 @@ public class RPCCall extends NetLoadableService {
 			}
 			idCounter++;
 		} catch (SocketTimeoutException e) {
-			Socket removed = cache.remove(key);
-			cleaner.remove(key);
-			if (removed != null) {
-				removed.close();
-			}
-			String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e.getMessage();
-			throw new IOException(errorMessage);
+			cleanup(invokeMessage, key, e);
 		} catch (IOException e1) {
-			Socket removed = cache.remove(key);
-			if (removed != null) {
-				removed.close();
-			}
-			String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e1.getMessage();
-			throw new IOException(errorMessage);
+			cleanup(invokeMessage, key, e1);
 		}
 		return recvObject;
+	}
+
+	private void cleanup(JSONObject invokeMessage, String key, IOException e1)
+			throws IOException {
+		Socket removed = cache.remove(key);
+		Timer t = cleaner.remove(key);
+		if (removed != null) {
+			removed.close();
+		}
+		if (t != null) {
+			t.cancel();
+		}
+		String errorMessage = "rpcPing failed: java.io.IOException Error processing request " + invokeMessage + ": " + e1.getMessage();
+		throw new IOException(errorMessage);
 	}
 
 	// Returns whether the message received was a success or not
