@@ -48,7 +48,7 @@ public class RPCCall extends NetLoadableService {
 	private static final String CALL_ID_KEY = "callid";
 	private static final String KEEP_ALIVE_VALUE = "keep-alive";
 	
-	private static final int CLEANUP_TIME = 10000;	// default idle time for cleaning up, 5 minutes, 300000ms
+	private static final int CLEANUP_TIME = 300000;	// default idle time for cleaning up, 5 minutes, 300000ms
 	
 	private static HashMap<String, Socket> cache = new HashMap<String, Socket>();
 	private static HashMap<String, Timer> cleaner = new HashMap<String, Timer>();
@@ -138,6 +138,7 @@ public class RPCCall extends NetLoadableService {
 			boolean tryAgain          // true if an invocation failure on a persistent connection should cause a re-try of the call, false to give up
 			) throws JSONException, IOException {
 		// For persistent connection, we will do a mapping from IP,port(String typed) --> Socket
+		System.out.println("RPCCall: timeout: " + socketTimeout);
 		JSONObject retval = null;
 		final String key = ip + "," + port;
 		Socket socket = cache.get(key);
@@ -192,7 +193,6 @@ public class RPCCall extends NetLoadableService {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				System.out.println("cleaning up cache...");
 				Socket sock = cache.remove(key);
 				cleaner.remove(key);
 				try {

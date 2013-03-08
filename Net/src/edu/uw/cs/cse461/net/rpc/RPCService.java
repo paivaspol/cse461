@@ -3,11 +3,14 @@ package edu.uw.cs.cse461.net.rpc;
 import java.io.EOFException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import javax.xml.ws.handler.MessageContext.Scope;
 
 import org.json.JSONObject;
 
@@ -27,20 +30,24 @@ import edu.uw.cs.cse461.util.Log;
  */
 public class RPCService extends NetLoadableService implements Runnable, RPCServiceInterface {
 	private static final String TAG="RPCService";
+	
+	private static final int SOCKET_TIMEOUT = 100;
 	private int rpcPort;
 	private ServerSocket serverSocket;
 	private HashMap<String, HashMap<String, RPCCallableMethod>> callableMethodStorage;
 	private enum SocketState {
     	FRESH, PERSISTENT, WAITING, COMPLETED
-	}	
+	}
 	private List<TCPMessageHandler> socketList = new ArrayList<TCPMessageHandler>();
 	private List<SocketState> socketStateList = new ArrayList<SocketState>();
+	private List<Long> timeWaited = new ArrayList<Long>();
 	private ConfigManager config = NetBase.theNetBase().config();
 	private String host = config.getProperty("net.host.name", "");
 	private int id;
 	private String serverIP;
 	private int numOfCurrentPersistentConnection;
-	
+	private int persistentTimeout;
+
 	/**
 	 * Constructor.  Creates the Java ServerSocket and binds it to a port.
 	 * If the config file specifies an rpc.server.port value, it should be bound to that port.
@@ -60,6 +67,7 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 		serverSocket.setSoTimeout(NetBase.theNetBase().config().getAsInt("net.timeout.granularity", 500));
 		id = 0;
 		numOfCurrentPersistentConnection = 0;
+		persistentTimeout = NetBase.theNetBase().config().getAsInt("rpc.persistence.timeout", 2500);
 		Thread thread = new Thread(this, "RPCService");
 		thread.start();
 	}
@@ -72,17 +80,18 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	public void run() {
 		try {
 			while(!mAmShutdown) {
-				while(true){
-					try {
-						// Add the TCPMessageHandler to the socketList. and also the respective	
-						socketList.add(new TCPMessageHandler(serverSocket.accept()));
-						socketStateList.add(SocketState.FRESH);
-					} catch(SocketTimeoutException e) {
-						// This is normal. Break to continue with receiving messages.
-						break;	
-					}	
-				}
-		
+				try {
+					// Add the TCPMessageHandler to the socketList. and also the respective
+					Socket socket = serverSocket.accept();
+					TCPMessageHandler tcpMessageHandler = new TCPMessageHandler(socket);
+					tcpMessageHandler.setTimeout(SOCKET_TIMEOUT);
+					socketList.add(tcpMessageHandler);
+					socketStateList.add(SocketState.FRESH);
+					timeWaited.add(0L);
+				} catch(SocketTimeoutException e) {
+					// This is normal. Break to continue with receiving messages.
+				}	
+
 				// Process connections
 				// Iterate through the socket list to remove closed connection socket.
 				for (int i = 0; i < socketList.size(); i++) {
@@ -91,10 +100,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 						while (true) {
 							// Read message as JSONObject.
 							JSONObject message = tcpSocket.readMessageAsJSONObject();
+							// Reset this socket persistent timeout connection
+							timeWaited.set(i, 0L);
 							String type = message.getString("type");
 							int clientId = message.getInt("id");
 							if (type.equals("control")) {
-								// Format normal response message that has the id field, host fiels, callid field and also
+								// Format normal response message that has the id field, host fields, callid field and also
 								// type field.
 								JSONObject responseMessage = new JSONObject();
 								responseMessage.put("id", id);
@@ -146,7 +157,6 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 									responseMessage.put("type", "ERROR");
 									responseMessage.put("callargs", message);
 								}
-								
 								tcpSocket.sendMessage(responseMessage);
 								
 								// Send response, change the state to complete iff the state is not persistent.
@@ -167,16 +177,13 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 					} catch (SocketTimeoutException e) {
 						Log.e(TAG, "Timed out waiting for data on tcp connection");
 						// Clean up the cache
-						if (socketStateList.get(i) == SocketState.PERSISTENT) {
-							numOfCurrentPersistentConnection--;
-						}
-						socketStateList.set(i, SocketState.COMPLETED);
+						timeWaited.set(i, timeWaited.get(i) + 100);
 					} catch (EOFException e) {
 						// normal termination of loop
 						Log.d(TAG, "EOF on tcpMessageHandlerSocket.readMessageAsString()");
 					} catch (Exception e) {
 						Log.i(TAG, "Unexpected exception while handling connection: " + e.getMessage());
-						// Clean up the cache
+						// Something went wrong, remove the socket later.
 						if (socketStateList.get(i) == SocketState.PERSISTENT) {
 							numOfCurrentPersistentConnection--;
 						}
@@ -190,6 +197,12 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 							}
 							socketList.remove(i);
 							socketStateList.remove(i);
+							timeWaited.remove(i);
+							i--;
+						} else if (timeWaited.get(i) >= persistentTimeout) {
+							socketList.remove(i);
+							socketStateList.remove(i);
+							timeWaited.remove(i);
 							i--;
 						}
 					}
@@ -240,8 +253,13 @@ public class RPCService extends NetLoadableService implements Runnable, RPCServi
 	 */
 	public RPCCallableMethod getRegistrationFor( String serviceName, String methodName) {
 		// Look up in the hashmap of hashmap that we have.
-		HashMap<String, RPCCallableMethod> methodNameToRPCCallableMethodMap = callableMethodStorage.get(serviceName);
-		return methodNameToRPCCallableMethodMap.get(methodName);
+		if (callableMethodStorage != null) {
+			HashMap<String, RPCCallableMethod> methodNameToRPCCallableMethodMap = callableMethodStorage.get(serviceName);
+			if (methodNameToRPCCallableMethodMap != null) {
+				return methodNameToRPCCallableMethodMap.get(methodName);
+			}
+		}
+		return null;
 	}
 	
 	/**
